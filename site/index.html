@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="ja" data-lang="ja">
+<head>
+<title>スキー旅行 家族5人 12月中旬</title>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;900&family=Barlow+Condensed:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: 1列のスマホ幅（最大480px）。交通手段の切り替え → 結論 → 候補カード → 選んだプランの日程・車・キャンセル料 → 詳細。
+   色：夜明け前の雪山の紺＋氷の青。アクセントはリフト鉄塔のオレンジ。
+   コースの難易度色（初級=緑・中級=赤・上級=黒）をレベル表示に使う。 */
+:root {
+  --bg: #eef3f8;
+  --surface: #ffffff;
+  --surface-2: #e3ebf3;
+  --ink: #0f2233;
+  --ink-2: #4a5d70;
+  --line: #cfdae5;
+  --night: #12304d;
+  --night-2: #1d4a73;
+  --night-ink: #ffffff;
+  --ice: #2f7fc1;
+  --ice-soft: #dcecf9;
+  --accent: #e8590c;
+  --accent-ink: #ffffff;
+  --accent-soft: #fde8db;
+  --good: #1f8a4c;
+  --good-soft: #def3e6;
+  --warn: #b25b00;
+  --warn-soft: #fbecd6;
+  --bad: #c62828;
+  --bad-soft: #fbe1e1;
+  --run-green: #1f8a4c;
+  --run-red: #d32f2f;
+  --run-black: #1b1b1b;
+  --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  --font-num: "Barlow Condensed", "Zen Kaku Gothic New", "Arial Narrow", sans-serif;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(15,34,51,.06), 0 4px 14px rgba(15,34,51,.07);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1622; --surface: #13212f; --surface-2: #1a2b3c; --ink: #e8f0f7; --ink-2: #9fb2c4;
+    --line: #26394c; --night: #0f2a44; --night-2: #18406a; --night-ink: #ffffff; --ice: #6cb4ee; --ice-soft: #16324a;
+    --accent: #ff7a33; --accent-ink: #1a0d04; --accent-soft: #3a2010;
+    --good: #4cc47f; --good-soft: #12301f; --warn: #f0a24a; --warn-soft: #33240f;
+    --bad: #ff6b6b; --bad-soft: #3a1717; --run-green: #4cc47f; --run-red: #ff6b6b; --run-black: #e8f0f7;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1622; --surface: #13212f; --surface-2: #1a2b3c; --ink: #e8f0f7; --ink-2: #9fb2c4;
+  --line: #26394c; --night: #0f2a44; --night-2: #18406a; --night-ink: #ffffff; --ice: #6cb4ee; --ice-soft: #16324a;
+  --accent: #ff7a33; --accent-ink: #1a0d04; --accent-soft: #3a2010;
+  --good: #4cc47f; --good-soft: #12301f; --warn: #f0a24a; --warn-soft: #33240f;
+  --bad: #ff6b6b; --bad-soft: #3a1717; --run-green: #4cc47f; --run-red: #ff6b6b; --run-black: #e8f0f7;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap {
+  max-width: 480px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+  display: flex; flex-direction: column; gap: 28px;
+}
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.3; }
+h2 { font-size: 20px; font-weight: 900; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+h2 small { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+p { margin: 0; }
+a { color: var(--ice); }
+button { font: inherit; color: inherit; }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.muted { color: var(--ink-2); font-size: 14px; }
+section { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 64px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* ヘッダー：夜の雪山の帯 */
+.hero-band {
+  background: linear-gradient(170deg, var(--night) 0%, var(--night-2) 100%);
+  color: var(--night-ink);
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 22px 60px;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.hero-band svg.ridge { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 44px; }
+.hero-band .ridge path { fill: var(--bg); }
+.eyebrow { font-size: 12px; letter-spacing: .12em; font-weight: 700; opacity: .8; }
+.hero-band h1 { font-size: 26px; font-weight: 900; margin-top: 4px; }
+.trip-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.trip-meta span { background: rgba(255,255,255,.14); border-radius: 999px; padding: 3px 10px; font-size: 13px; }
+.sample-flag { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+
+/* 交通手段の切り替え */
+.mode-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; opacity: .85; }
+.modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: rgba(255,255,255,.12); border-radius: 12px; padding: 4px; position: relative; z-index: 1; }
+.mode {
+  border: 0; background: transparent; color: var(--night-ink);
+  min-height: 44px; border-radius: 9px; font-weight: 700; font-size: 14px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2;
+}
+.mode small { font-size: 11px; font-weight: 500; opacity: .8; font-family: var(--font-num); }
+.mode[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+.mode[aria-pressed="true"] small { color: var(--accent); opacity: 1; }
+
+/* 結論カード */
+.verdict {
+  margin-top: -48px; position: relative;
+  background: var(--surface); border-radius: 18px; box-shadow: var(--shadow);
+  border: 2px solid var(--accent);
+  padding: 18px; display: flex; flex-direction: column; gap: 14px;
+}
+.verdict .label { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--accent-ink); font-weight: 900; font-size: 13px; padding: 3px 10px; border-radius: 999px; width: fit-content; }
+.verdict h2 { font-size: 21px; display: block; }
+.price-row { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.price-big { font-size: 46px; font-weight: 700; line-height: 1; color: var(--ink); }
+.price-big .yen { font-size: 24px; margin-right: 2px; }
+.price-unit { font-size: 14px; color: var(--ink-2); padding-bottom: 4px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; }
+.fact { background: var(--surface-2); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.fact dt { font-size: 11px; color: var(--ink-2); font-weight: 700; }
+.fact dd { margin: 0; font-weight: 700; font-size: 15px; }
+.reasons { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.reasons li { display: grid; grid-template-columns: 22px 1fr; gap: 6px; font-size: 15px; }
+.reasons li::before { content: "✓"; color: var(--good); font-weight: 900; text-align: center; }
+.deadline { background: var(--warn-soft); color: var(--warn); border-radius: 10px; padding: 10px 12px; font-size: 14px; font-weight: 700; }
+.deadline .num { font-size: 18px; }
+
+/* ボタン */
+.btns { display: flex; flex-direction: column; gap: 8px; }
+.btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  min-height: 48px; padding: 10px 16px; border-radius: 12px; border: 0; cursor: pointer; width: 100%;
+  text-decoration: none; font-weight: 700; font-size: 15px; text-align: left;
+  background: var(--accent); color: var(--accent-ink);
+}
+.btn.sub { background: var(--ice-soft); color: var(--ice); }
+.btn small { font-weight: 500; font-size: 12px; opacity: .85; }
+a.btn::after { content: "↗"; font-size: 16px; }
+.btn.show { background: var(--surface-2); color: var(--ink); }
+.btn.show::after { content: "↓"; font-size: 16px; }
+
+/* 目次（スクロールしても上に残る） */
+.toc {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg);
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 8px;
+  border-bottom: 1px solid var(--line);
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+}
+.toc::-webkit-scrollbar { display: none; }
+.toc a { flex: none; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 700; }
+
+/* 費用の比較バー（タップでそのプランを選ぶ） */
+.bars { background: var(--surface); border-radius: var(--radius); padding: 8px; display: flex; flex-direction: column; gap: 2px; }
+.bar { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; border: 0; background: transparent; padding: 8px; border-radius: 10px; cursor: pointer; text-align: left; width: 100%; }
+.bar[aria-pressed="true"] { background: var(--surface-2); }
+.bar .name { font-size: 14px; font-weight: 700; min-width: 0; }
+.bar .val { font-size: 18px; font-weight: 700; text-align: right; }
+.bar .track { grid-column: 1 / -1; height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.bar[aria-pressed="true"] .track { background: var(--bg); }
+.bar .fill { height: 100%; border-radius: 999px; background: var(--ice); transition: width .25s; }
+.bar.best .fill { background: var(--accent); }
+
+/* 候補カード */
+.cards { display: flex; flex-direction: column; gap: 14px; }
+.card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; display: flex; flex-direction: column; gap: 12px; border: 2px solid transparent; scroll-margin-top: 64px; }
+.card.selected { border-color: var(--ice); }
+.card-head { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+.rank { width: 34px; height: 34px; border-radius: 10px; background: var(--night); color: var(--night-ink); display: grid; place-items: center; font-size: 20px; font-weight: 700; }
+.card h3 { font-size: 17px; font-weight: 900; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.badge { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: var(--surface-2); color: var(--ink-2); }
+.badge.best { background: var(--accent-soft); color: var(--accent); }
+.badge.cheap { background: var(--good-soft); color: var(--good); }
+.badge.fast { background: var(--ice-soft); color: var(--ice); }
+.badge.viewing { background: var(--ice); color: var(--surface); }
+.card .price-row .price-big { font-size: 34px; }
+.card .price-row .price-big .yen { font-size: 18px; }
+.pc { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.pc p { display: grid; grid-template-columns: 20px 1fr; gap: 6px; font-size: 14px; }
+.pc .pro::before { content: "＋"; color: var(--good); font-weight: 900; }
+.pc .con::before { content: "－"; color: var(--warn); font-weight: 900; }
+details { border-top: 1px solid var(--line); padding-top: 10px; }
+summary { cursor: pointer; font-weight: 700; font-size: 14px; color: var(--ice); list-style: none; min-height: 32px; display: flex; align-items: center; gap: 6px; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "▸"; transition: transform .15s; }
+details[open] summary::before { transform: rotate(90deg); }
+.breakdown { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+.breakdown td { padding: 7px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.breakdown td:last-child { text-align: right; white-space: nowrap; font-family: var(--font-num); font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; padding-left: 12px; }
+.breakdown td small { display: block; color: var(--ink-2); font-size: 12px; }
+.breakdown tr.total td { border-bottom: none; font-weight: 900; padding-top: 10px; }
+.breakdown tr.total td:last-child { font-size: 22px; color: var(--accent); }
+.breakdown tr.rental td { color: var(--warn); }
+.empty { background: var(--surface); border-radius: var(--radius); padding: 16px; font-size: 14px; color: var(--ink-2); }
+
+/* レベル表示（コースの難易度色） */
+.levels { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; }
+.lv { display: inline-flex; align-items: center; gap: 5px; }
+.lv i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.lv.g i { background: var(--run-green); }
+.lv.r i { background: var(--run-red); }
+.lv.k i { background: var(--run-black); transform: rotate(45deg); border-radius: 1px; }
+
+/* 選んだプランの詳細 */
+.viewing-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: var(--ice-soft); color: var(--ice); border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 700; }
+.viewing-bar b { color: var(--ink); font-size: 14px; }
+
+/* スケジュール */
+.day { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; }
+.day + .day { margin-top: 0; }
+.day h3 { font-size: 15px; margin-bottom: 8px; }
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 52px 14px 1fr; gap: 8px; position: relative; padding-bottom: 12px; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline .t { font-family: var(--font-num); font-size: 18px; font-weight: 700; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.timeline .dot { position: relative; }
+.timeline .dot::before { content: ""; position: absolute; left: 3px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--ice); }
+.timeline li:not(:last-child) .dot::after { content: ""; position: absolute; left: 6px; top: 17px; bottom: -7px; width: 2px; background: var(--line); }
+.timeline li.key .dot::before { background: var(--accent); width: 10px; height: 10px; left: 2px; }
+.timeline .what { font-size: 15px; min-width: 0; }
+.timeline .what small { display: block; color: var(--ink-2); font-size: 13px; }
+.plan-block { display: flex; flex-direction: column; gap: 12px; }
+
+/* 迎えのルート */
+.route { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.stop { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; }
+.stop .pin { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; background: var(--ice-soft); color: var(--ice); }
+.stop.car .pin { background: var(--night); color: var(--night-ink); }
+.stop.goal .pin { background: var(--accent); color: var(--accent-ink); }
+.stop .t { font-family: var(--font-num); font-size: 20px; font-weight: 700; }
+.stop .who { font-weight: 700; font-size: 15px; min-width: 0; }
+.stop .who small { display: block; font-weight: 400; color: var(--ink-2); font-size: 13px; }
+.leg { margin-left: 14px; border-left: 2px dashed var(--line); padding: 2px 0 2px 24px; font-size: 13px; color: var(--ink-2); }
+.car-facts { grid-template-columns: 1fr 1fr; }
+
+/* キャンセル料 */
+.cancel { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.cancel h3 { font-size: 15px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.step { border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 12px; background: var(--good-soft); color: var(--good); min-width: 0; }
+.step b { display: block; font-family: var(--font-num); font-size: 18px; }
+.step.mid { background: var(--warn-soft); color: var(--warn); }
+.step.hi { background: var(--bad-soft); color: var(--bad); }
+
+/* 注意 */
+.notes { display: flex; flex-direction: column; gap: 8px; }
+.note { border-radius: 12px; padding: 12px 14px; font-size: 14px; background: var(--ice-soft); }
+.note.warn { background: var(--warn-soft); }
+.note b { display: block; margin-bottom: 2px; }
+
+/* 詳細（折りたたみ） */
+.more { background: var(--surface); border-radius: var(--radius); padding: 4px 16px 12px; }
+.more ul { margin: 8px 0 0; padding-left: 1.2em; font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+.more li { overflow-wrap: anywhere; }
+footer { font-size: 12px; color: var(--ink-2); text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  summary::before, .bar .fill { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* 言語の切り替え */
+html[data-lang="ja"] .l-vi, html[data-lang="vi"] .l-ja { display: none; }
+.langs { position: absolute; top: 14px; right: max(16px, env(safe-area-inset-right, 0px)); z-index: 2; display: flex; gap: 4px; background: rgba(255,255,255,.16); border-radius: 999px; padding: 3px; }
+.langs button { border: 0; background: transparent; color: var(--night-ink); font-weight: 900; font-size: 14px; min-height: 36px; min-width: 52px; border-radius: 999px; cursor: pointer; }
+.langs button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: rgba(255,255,255,.12); border-radius: 12px; padding: 4px; position: relative; z-index: 1; margin-top: 6px; }
+.area { border: 0; background: transparent; color: var(--night-ink); min-height: 40px; border-radius: 9px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.area[aria-pressed="true"] { background: var(--surface); color: var(--ink); }
+.stars { color: var(--accent); letter-spacing: .05em; }
+.goals { display: flex; flex-direction: column; gap: 8px; }
+.goal { background: var(--surface); border-radius: 12px; padding: 10px 12px; display: grid; grid-template-columns: 92px 1fr auto; gap: 8px; align-items: center; font-size: 14px; }
+.goal b { color: var(--accent); }
+.link { border: 0; background: var(--ice-soft); color: var(--ice); font-weight: 700; border-radius: 8px; min-height: 36px; padding: 0 12px; cursor: pointer; }
+.tablewrap { overflow-x: auto; background: var(--surface); border-radius: var(--radius); }
+.cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmp th, .cmp td { padding: 8px 6px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; font-family: var(--font-num); font-size: 15px; }
+.cmp th:first-child, .cmp td:first-child { text-align: left; white-space: normal; font-family: var(--font-body); font-size: 13px; }
+.cmp th { font-size: 12px; color: var(--ink-2); }
+.hero-band { padding-top: 64px; }
+html[data-lang="vi"] body { font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="hero-band">
+    <div class="langs" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="vi" aria-pressed="false">Tiếng Việt</button></div>
+    <div>
+      <div class="eyebrow">SKI TRIP</div>
+      <h1><span class="l-ja">家族5人 スキー旅行 1泊2日</span><span class="l-vi" lang="vi">Chuyến trượt tuyết gia đình 5 người, 2 ngày 1 đêm</span></h1>
+      <div class="trip-meta">
+        <span><span class="l-ja">12月中旬（12/12・12/16・12/19を比較）</span><span class="l-vi" lang="vi">Giữa tháng 12 (so sánh 12/12, 16/12, 19/12)</span></span>
+        <span><span class="l-ja">大人2・中学生1・小5・小3</span><span class="l-vi" lang="vi">2 người lớn, 1 THCS, lớp 5, lớp 3</span></span>
+        <span><span class="l-ja">全員スキー初心者・フルレンタル</span><span class="l-vi" lang="vi">Tất cả mới tập, thuê đồ đầy đủ</span></span>
+        <span><span class="l-ja">志木発／新幹線は大宮から</span><span class="l-vi" lang="vi">Từ Shiki / tàu từ Omiya</span></span>
+        <span><span class="l-ja">2026/11/13 調査</span><span class="l-vi" lang="vi">Khảo sát 13/11/2026</span></span>
+      </div>
+    </div>
+    <div>
+      <div class="mode-label" id="mode-label"><span class="l-ja">交通手段で選ぶ</span><span class="l-vi" lang="vi">Chọn phương tiện</span></div>
+      <div class="modes" role="group" aria-labelledby="mode-label"><button class="mode" type="button" data-mode="all" aria-pressed="true"><span class="l-ja">すべて</span><span class="l-vi" lang="vi">Tất cả</span><small>11<span class="l-ja">件</span><span class="l-vi" lang="vi"> gói</span></small></button>
+        <button class="mode" type="button" data-mode="train" aria-pressed="false"><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Tàu</span><small>¥20,560〜</small></button>
+        <button class="mode" type="button" data-mode="bus" aria-pressed="false"><span class="l-ja">バス</span><span class="l-vi" lang="vi">Xe buýt</span><small>¥19,900〜</small></button>
+        <button class="mode" type="button" data-mode="car" aria-pressed="false"><span class="l-ja">車</span><span class="l-vi" lang="vi">Ô tô</span><small>¥46,166〜</small></button></div>
+      <div class="mode-label" style="margin-top:10px"><span class="l-ja">エリアで選ぶ</span><span class="l-vi" lang="vi">Chọn khu vực</span></div>
+      <div class="areas" role="group"><button class="area" type="button" data-area="all" aria-pressed="true"><span class="l-ja">すべて</span><span class="l-vi" lang="vi">Tất cả</span></button><button class="area" type="button" data-area="niigata" aria-pressed="false"><span class="l-ja">新潟</span><span class="l-vi" lang="vi">Niigata</span></button><button class="area" type="button" data-area="nagano" aria-pressed="false"><span class="l-ja">長野</span><span class="l-vi" lang="vi">Nagano</span></button></div>
+    </div>
+    <svg class="ridge" viewBox="0 0 400 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44 L0 30 L40 18 L70 26 L120 6 L160 22 L200 12 L250 28 L300 4 L340 20 L370 14 L400 24 L400 44 Z"/></svg>
+  </header>
+  
+  <section class="verdict" id="best" data-mode="all" data-plan="p1">
+    <span class="label"><span class="l-ja">いちばんおすすめ</span><span class="l-vi" lang="vi">Đề xuất số 1</span></span>
+    <h2><span class="l-ja">石打丸山＋アーバンヒル石打（新幹線ツアー）</span><span class="l-vi" lang="vi">Ishiuchi Maruyama + Urban Hill Ishiuchi (tour tàu Shinkansen)</span></h2>
+    <p class="muted"><span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 (T7) – 20/12 (CN)</span></p>
+    <div class="price-row"><div class="price-big num"><span class="yen">¥</span>21,160</div><div class="price-unit"><span class="l-ja">1人あたり（5人・上限） 総額</span><span class="l-vi" lang="vi">mỗi người · tổng 5 người</span> ¥105,800</div></div>
+    <ul class="reasons"><li><span class="l-ja">新幹線ツアーで、宿2食・リフト1日券込み・レンタルも1日700円/点と安い</span><span class="l-vi" lang="vi">Tour tàu rẻ, gồm 2 bữa và vé 1 ngày; thuê đồ chỉ 700 yên/món</span></li><li><span class="l-ja">ゲレンデまで徒歩1分・温泉・全室禁煙・鍋食べ放題</span><span class="l-vi" lang="vi">Ra dốc 1 phút, suối nóng, cấm hút thuốc, lẩu ăn thoải mái</span></li><li><span class="l-ja">大宮から約1時間。12/19-20の週末で、21日前（11/28）まで無料キャンセル</span><span class="l-vi" lang="vi">Từ Omiya ~1 giờ; hủy miễn phí đến 28/11</span></li></ul><div class="deadline"><span class="l-ja">予約するなら</span><span class="l-vi" lang="vi">Nên đặt trước</span> <span class="num">11/28</span> <span class="l-ja">まで（無料キャンセル期限（21日前））</span><span class="l-vi" lang="vi">(hạn hủy miễn phí)</span></div>
+    <div class="btns"><a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=2821&amp;c3=046001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">予約する</span><span class="l-vi" lang="vi">Đặt ngay</span> <small>トラベルイン</small></a>
+      <button class="btn show" type="button" data-show="p1"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button></div>
+  </section>
+  <section class="verdict" data-mode="train" data-plan="p1" hidden>
+    <span class="label"><span class="l-ja">新幹線ならこれ</span><span class="l-vi" lang="vi">Nếu đi tàu</span></span>
+    <h2><span class="l-ja">石打丸山＋アーバンヒル石打（新幹線ツアー）</span><span class="l-vi" lang="vi">Ishiuchi Maruyama + Urban Hill Ishiuchi (tour tàu Shinkansen)</span></h2>
+    <p class="muted"><span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 (T7) – 20/12 (CN)</span></p>
+    <div class="price-row"><div class="price-big num"><span class="yen">¥</span>21,160</div><div class="price-unit"><span class="l-ja">1人あたり（5人・上限） 総額</span><span class="l-vi" lang="vi">mỗi người · tổng 5 người</span> ¥105,800</div></div>
+    <ul class="reasons"><li><span class="l-ja">総合のおすすめと同じ</span><span class="l-vi" lang="vi">Giống gói đề xuất</span></li><li><span class="l-ja">12/12に行くなら軽井沢（p7・p10）</span><span class="l-vi" lang="vi">Nếu đi 12/12 thì chọn Karuizawa</span></li></ul><div class="deadline"><span class="l-ja">予約するなら</span><span class="l-vi" lang="vi">Nên đặt trước</span> <span class="num">11/28</span> <span class="l-ja">まで（無料キャンセル期限（21日前））</span><span class="l-vi" lang="vi">(hạn hủy miễn phí)</span></div>
+    <div class="btns"><a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=2821&amp;c3=046001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">予約する</span><span class="l-vi" lang="vi">Đặt ngay</span> <small>トラベルイン</small></a>
+      <button class="btn show" type="button" data-show="p1"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button></div>
+  </section>
+  <section class="verdict" data-mode="bus" data-plan="p3" hidden>
+    <span class="label"><span class="l-ja">バスならこれ</span><span class="l-vi" lang="vi">Nếu đi xe buýt</span></span>
+    <h2><span class="l-ja">上越国際＋プチハウスひろみ（新宿発バスツアー）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Petit House Hiromi (tour xe buýt từ Shinjuku)</span></h2>
+    <p class="muted"><span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span></p>
+    <div class="price-row"><div class="price-big num"><span class="yen">¥</span>19,900</div><div class="price-unit"><span class="l-ja">1人あたり（5人・上限） 総額</span><span class="l-vi" lang="vi">mỗi người · tổng 5 người</span> ¥99,500</div></div>
+    <ul class="reasons"><li><span class="l-ja">全候補で最安</span><span class="l-vi" lang="vi">Rẻ nhất</span></li><li><span class="l-ja">ただし新幹線ツアーとの差は1人¥600ほど</span><span class="l-vi" lang="vi">Chỉ rẻ hơn tàu ~600 yên/người</span></li></ul><div class="deadline"><span class="l-ja">予約するなら</span><span class="l-vi" lang="vi">Nên đặt trước</span> <span class="num">11/28</span> <span class="l-ja">まで（無料キャンセル期限）</span><span class="l-vi" lang="vi">(hạn hủy miễn phí)</span></div>
+    <div class="btns"><a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=410&amp;c1=18&amp;c2=3011&amp;c3=021001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">予約する</span><span class="l-vi" lang="vi">Đặt ngay</span> <small>トラベルイン</small></a>
+      <button class="btn show" type="button" data-show="p3"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button></div>
+  </section>
+  <section class="verdict" data-mode="car" data-plan="p11" hidden>
+    <span class="label"><span class="l-ja">車ならこれ</span><span class="l-vi" lang="vi">Nếu đi ô tô</span></span>
+    <h2><span class="l-ja">軽井沢プリンス＋プリンスホテル ウエスト（レンタカー）</span><span class="l-vi" lang="vi">Karuizawa Prince + Prince Hotel West (thuê ô tô)</span></h2>
+    <p class="muted"><span class="l-ja">12/12（土）〜13（日）</span><span class="l-vi" lang="vi">12/12 – 13/12</span></p>
+    <div class="price-row"><div class="price-big num"><span class="yen">¥</span>46,166</div><div class="price-unit"><span class="l-ja">1人あたり（5人・上限） 総額</span><span class="l-vi" lang="vi">mỗi người · tổng 5 người</span> ¥230,828</div></div>
+    <ul class="reasons"><li><span class="l-ja">雪道の運転に慣れていないなら、高速の出口から近い軽井沢</span><span class="l-vi" lang="vi">Karuizawa gần lối ra cao tốc, ít đường tuyết</span></li><li><span class="l-ja">ただしレンタカーのスタッドレス料金・在庫は店舗で確認</span><span class="l-vi" lang="vi">Cần hỏi cửa hàng về lốp mùa đông</span></li></ul>
+    <div class="btns"><a class="btn" href="https://rent.toyota.co.jp/" target="_blank" rel="noopener"><span class="l-ja">予約する</span><span class="l-vi" lang="vi">Đặt ngay</span> <small>トヨタレンタカー</small></a>
+      <button class="btn show" type="button" data-show="p11"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button></div>
+  </section>
+  <nav class="toc" aria-label="目次">
+    <a href="#best"><span class="l-ja">結論</span><span class="l-vi" lang="vi">Kết luận</span></a><a href="#goals"><span class="l-ja">目的別</span><span class="l-vi" lang="vi">Theo mục đích</span></a><a href="#dates"><span class="l-ja">週末/平日</span><span class="l-vi" lang="vi">Ngày</span></a><a href="#compare"><span class="l-ja">候補</span><span class="l-vi" lang="vi">Các gói</span></a>
+    <a href="#schedule"><span class="l-ja">日程</span><span class="l-vi" lang="vi">Lịch trình</span></a><a href="#cancel"><span class="l-ja">キャンセル料</span><span class="l-vi" lang="vi">Phí hủy</span></a><a href="#notes"><span class="l-ja">注意</span><span class="l-vi" lang="vi">Lưu ý</span></a><a href="#more"><span class="l-ja">詳細</span><span class="l-vi" lang="vi">Chi tiết</span></a>
+  </nav>
+  <section id="goals"><h2><span class="l-ja">目的別の総評</span><span class="l-vi" lang="vi">Gợi ý theo mục đích</span></h2><div class="goals"><div class="goal"><b><span class="l-ja">総合</span><span class="l-vi" lang="vi">Tổng thể</span></b><span><span class="l-ja">石打＋アーバンヒル（新幹線）。安さ・宿の近さ・食事のバランスが良い</span><span class="l-vi" lang="vi">Ishiuchi + Urban Hill (tàu): cân bằng giá, vị trí, bữa ăn</span></span><button class="link" type="button" data-show="p1"><span class="l-ja">見る</span><span class="l-vi" lang="vi">Xem</span></button></div><div class="goal"><b><span class="l-ja">安さ</span><span class="l-vi" lang="vi">Giá rẻ</span></b><span><span class="l-ja">上越国際＋ひろみ（バス）1人¥19,900〜。ただし新幹線版と¥600差</span><span class="l-vi" lang="vi">Joetsu + Hiromi (xe buýt) từ 19.900 yên</span></span><button class="link" type="button" data-show="p3"><span class="l-ja">見る</span><span class="l-vi" lang="vi">Xem</span></button></div><div class="goal"><b><span class="l-ja">移動がラク</span><span class="l-vi" lang="vi">Di chuyển dễ</span></b><span><span class="l-ja">軽井沢（新幹線約45分・駅からシャトル）。12/12でも確実に滑れる</span><span class="l-vi" lang="vi">Karuizawa: tàu 45 phút, chắc chắn có tuyết 12/12</span></span><button class="link" type="button" data-show="p10"><span class="l-ja">見る</span><span class="l-vi" lang="vi">Xem</span></button></div><div class="goal"><b><span class="l-ja">ご飯</span><span class="l-vi" lang="vi">Bữa ăn</span></b><span><span class="l-ja">NASPAニューオータニ（ビュッフェ 夕食4.32）</span><span class="l-vi" lang="vi">NASPA New Otani (buffet 4,32)</span></span><button class="link" type="button" data-show="p9"><span class="l-ja">見る</span><span class="l-vi" lang="vi">Xem</span></button></div><div class="goal"><b><span class="l-ja">温泉・宿の評価</span><span class="l-vi" lang="vi">Suối nóng & đánh giá</span></b><span><span class="l-ja">NASPAニューオータニ（4.42・源泉かけ流し）。スキー専用ゲレンデで初心者向き</span><span class="l-vi" lang="vi">NASPA New Otani (4,42, suối nóng tự nhiên)</span></span><button class="link" type="button" data-show="p9"><span class="l-ja">見る</span><span class="l-vi" lang="vi">Xem</span></button></div></div></section>
+  
+  <section id="dates">
+    <h2><span class="l-ja">週末と平日、どっちが安い？</span><span class="l-vi" lang="vi">Cuối tuần hay ngày thường rẻ hơn?</span></h2>
+    <div class="note"><b><span class="l-ja">結論：週末で大丈夫</span><span class="l-vi" lang="vi">Kết luận: đi cuối tuần là được</span></b><span class="l-ja">新潟のスキー場は多くが12/18〜19オープン予定で、12/12〜17はまだ滑れません。長野のツアー（白馬・志賀・野沢）は、12/12（土）と12/16（水）が同じ値段で、平日にしても安くなりません。12/19（土）は12/12より大人1人¥2,400〜6,100高くなります。</span><span class="l-vi" lang="vi">Phần lớn khu trượt ở Niigata mở cửa 18–19/12, nên 12–17/12 chưa trượt được. Tour ở Nagano giá ngày 12/12 (T7) và 16/12 (T4) giống nhau. Ngày 19/12 đắt hơn 2.400–6.100 yên/người lớn.</span></div>
+    <div class="tablewrap"><table class="cmp">
+      <tr><th><span class="l-ja">宿・ツアー（大人1人）</span><span class="l-vi" lang="vi">Gói (1 người lớn)</span></th><th>12/12<br><span class="l-ja">土</span><span class="l-vi" lang="vi">T7</span></th><th>12/16<br><span class="l-ja">水</span><span class="l-vi" lang="vi">T4</span></th><th>12/19<br><span class="l-ja">土</span><span class="l-vi" lang="vi">T7</span></th></tr>
+      <tr><td><span class="l-ja">白馬パークホテル（ツアー）</span><span class="l-vi" lang="vi">Hakuba Park Hotel</span></td><td>¥27,200</td><td>¥27,200</td><td>¥32,600</td></tr>
+      <tr><td><span class="l-ja">志賀ハイランドホテル（ツアー）</span><span class="l-vi" lang="vi">Shiga Highland Hotel</span></td><td>¥27,200</td><td>¥27,200</td><td>¥29,600</td></tr>
+      <tr><td><span class="l-ja">野沢 ナイス信濃荘（ツアー）</span><span class="l-vi" lang="vi">Nozawa Nice Shinanoso</span></td><td>¥27,700</td><td>¥27,700</td><td>¥30,200</td></tr>
+      <tr><td><span class="l-ja">ホテル軽井沢1130（ツアー）</span><span class="l-vi" lang="vi">Hotel Karuizawa 1130</span></td><td>¥32,400</td><td>¥29,800</td><td>¥34,200</td></tr>
+      <tr><td><span class="l-ja">石打 アーバンヒル（ツアー）</span><span class="l-vi" lang="vi">Urban Hill Ishiuchi</span></td><td><span class="l-ja">販売なし</span><span class="l-vi" lang="vi">không bán</span></td><td><span class="l-ja">販売なし</span><span class="l-vi" lang="vi">không bán</span></td><td>¥21,800</td></tr>
+      <tr><td><span class="l-ja">軽井沢プリンス ウエスト（5人・宿のみ）</span><span class="l-vi" lang="vi">Prince West (5 người, chỉ phòng)</span></td><td>¥164,628</td><td>¥145,640</td><td><span class="l-ja">2食なし</span><span class="l-vi" lang="vi">không có 2 bữa</span></td></tr>
+    </table></div>
+    <p class="muted"><span class="l-ja">平日は子どもが学校を休む必要があります。12/12に行くなら長野（軽井沢など）、12/19なら新潟が選べます。</span><span class="l-vi" lang="vi">Ngày thường thì trẻ phải nghỉ học. Đi 12/12 thì chọn Nagano, 19/12 thì chọn được Niigata.</span></p>
+  </section>
+  <section id="compare">
+    <h2><span class="l-ja">候補を比べる</span><span class="l-vi" lang="vi">So sánh các gói</span> <small id="compare-count"></small></h2>
+    <p class="muted"><span class="l-ja">★の多い順、同じ★なら安い順。★★★＝天然温泉の大浴場＋口コミ3.5以上・100件以上、★★＝3.0以上・15件以上、★＝確かめられた特長が少ない（悪いという意味ではない）。口コミは楽天トラベルでそろえています。金額は「交通＋宿2食＋リフト」の1人あたりで、小学生も大人料金で数えた上限です。レンタルは別に表示。</span><span class="l-vi" lang="vi">Sắp xếp theo ★ rồi theo giá. Giá = đi lại + khách sạn 2 bữa + vé, mỗi người, tính tối đa (trẻ em tính như người lớn). Đánh giá theo Rakuten Travel. Thuê đồ ghi riêng.</span></p>
+    <div class="bars" aria-label="1人あたりの費用"><button class="bar" type="button" data-mode="train" data-area="niigata" data-plan="p9" data-value="35758" aria-pressed="false"><span class="name">1. <span class="l-ja">NASPAスキーガーデン＋NASPAニューオータニ（自分で手配）</span><span class="l-vi" lang="vi">NASPA Ski Garden + NASPA New Otani (tự đặt)</span></span><span class="val num">¥35,758</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="train" data-area="niigata" data-plan="p6" data-value="39805" aria-pressed="false"><span class="name">2. <span class="l-ja">上越国際＋ホテルグリーンプラザ上越（ファミリー限定・レンタル込み）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Hotel Green Plaza Joetsu (gói gia đình, gồm thuê đồ)</span></span><span class="val num">¥39,805</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="train" data-area="nagano" data-plan="p10" data-value="45842" aria-pressed="false"><span class="name">3. <span class="l-ja">軽井沢プリンス＋軽井沢プリンスホテル ウエスト（自分で手配）</span><span class="l-vi" lang="vi">Karuizawa Prince + Prince Hotel West (tự đặt)</span></span><span class="val num">¥45,842</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="car" data-area="nagano" data-plan="p11" data-value="46166" aria-pressed="false"><span class="name">4. <span class="l-ja">軽井沢プリンス＋プリンスホテル ウエスト（レンタカー）</span><span class="l-vi" lang="vi">Karuizawa Prince + Prince Hotel West (thuê ô tô)</span></span><span class="val num">¥46,166</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="bus" data-area="niigata" data-plan="p3" data-value="19900" aria-pressed="false"><span class="name">5. <span class="l-ja">上越国際＋プチハウスひろみ（新宿発バスツアー）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Petit House Hiromi (tour xe buýt từ Shinjuku)</span></span><span class="val num">¥19,900</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="bus" data-area="niigata" data-plan="p4" data-value="20500" aria-pressed="false"><span class="name">6. <span class="l-ja">石打丸山＋アーバンヒル石打（新宿発バスツアー）</span><span class="l-vi" lang="vi">Ishiuchi + Urban Hill Ishiuchi (xe buýt từ Shinjuku)</span></span><span class="val num">¥20,500</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="train" data-area="niigata" data-plan="p2" data-value="20560" aria-pressed="false"><span class="name">7. <span class="l-ja">上越国際＋プチハウスひろみ（新幹線ツアー）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Petit House Hiromi (tour Shinkansen)</span></span><span class="val num">¥20,560</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar best" type="button" data-mode="train" data-area="niigata" data-plan="p1" data-value="21160" aria-pressed="true"><span class="name">8. <span class="l-ja">石打丸山＋アーバンヒル石打（新幹線ツアー）</span><span class="l-vi" lang="vi">Ishiuchi Maruyama + Urban Hill Ishiuchi (tour tàu Shinkansen)</span></span><span class="val num">¥21,160</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="train" data-area="niigata" data-plan="p5" data-value="22610" aria-pressed="false"><span class="name">9. <span class="l-ja">石打丸山＋アーバンヒル石打（ビッグホリデー・レンタル込み）</span><span class="l-vi" lang="vi">Ishiuchi + Urban Hill (Big Holiday, đã gồm thuê đồ)</span></span><span class="val num">¥22,610</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="train" data-area="nagano" data-plan="p7" data-value="32400" aria-pressed="false"><span class="name">10. <span class="l-ja">軽井沢プリンス＋ホテル軽井沢1130（新幹線ツアー）</span><span class="l-vi" lang="vi">Karuizawa Prince + Hotel Karuizawa 1130 (tour Shinkansen)</span></span><span class="val num">¥32,400</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button><button class="bar" type="button" data-mode="train" data-area="nagano" data-plan="p8" data-value="32520" aria-pressed="false"><span class="name">11. <span class="l-ja">白馬五竜＆Hakuba47＋白馬パークホテル（新幹線ツアー）</span><span class="l-vi" lang="vi">Hakuba Goryu & 47 + Hakuba Park Hotel (tour Shinkansen)</span></span><span class="val num">¥32,520</span><span class="track"><span class="fill" style="display:block;width:50%"></span></span></button></div>
+    <div class="cards">
+      <article class="card" id="card-p9" data-mode="train" data-area="niigata" data-plan="p9">
+        <div class="card-head"><div class="rank num">1</div><div>
+          <h3><span class="l-ja">NASPAスキーガーデン＋NASPAニューオータニ（自分で手配）</span><span class="l-vi" lang="vi">NASPA Ski Garden + NASPA New Otani (tự đặt)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge "><span class="l-ja">★★★</span><span class="l-vi" lang="vi">★★★</span></span><span class="badge "><span class="l-ja">スキー専用ゲレンデ</span><span class="l-vi" lang="vi">Khu chỉ cho trượt ván đôi</span></span></div></div></div>
+        <p class="muted"><span class="stars">★★★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span> ・ じゃらん＋えきねっと</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>35,758</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span></div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券（25-26：大人¥7,000・子ども¥4,800、今季は未確認）</span><span class="l-vi" lang="vi">Vé 1 ngày (giá mùa trước)</span></p>
+        <p class="muted"><span class="l-ja">口コミ：</span><span class="l-vi" lang="vi">Đánh giá: </span><span class="l-ja">楽天 4.42（2,250件）／部屋4.45・夕食4.32・風呂4.36・清潔4.46</span><span class="l-vi" lang="vi">Rakuten 4,42 (2.250)</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">口コミ4.42（2,250件）。広い部屋・ビュッフェ（寿司・ローストビーフ）</span><span class="l-vi" lang="vi">Đánh giá 4,42 (2.250). Phòng rộng, buffet sushi, bò nướng</span></p><p class="pro"><span class="l-ja">スキー専用（スノボ不可）でぶつかりにくく、初心者の家族向き</span><span class="l-vi" lang="vi">Chỉ dành cho trượt tuyết (không ván đơn), an toàn cho người mới</span></p><p class="pro"><span class="l-ja">源泉かけ流しの大浴場・露天、屋内プール。全室禁煙</span><span class="l-vi" lang="vi">Suối nóng tự nhiên, hồ bơi trong nhà, cấm hút thuốc</span></p><p class="con"><span class="l-ja">ツアーより1人¥1.5万ほど高い</span><span class="l-vi" lang="vi">Đắt hơn tour khoảng 15.000 yên/người</span></p><p class="con"><span class="l-ja">NASPAの今季のリフト料金・オープン日・レンタル料金が未確認</span><span class="l-vi" lang="vi">Chưa xác nhận giá vé, ngày mở cửa, giá thuê đồ mùa này</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">宿（2食付き・禁煙・5人1室）</span><span class="l-vi" lang="vi">Khách sạn (2 bữa, 5 người 1 phòng)</span><small><span class="l-ja">じゃらん 12/19泊（クーポン前）</span><span class="l-vi" lang="vi">Jalan, đêm 19/12</span></small></td><td>¥98,952</td></tr><tr><td><span class="l-ja">新幹線 大宮⇔越後湯沢（往復）</span><span class="l-vi" lang="vi">Tàu Omiya ⇔ Echigo-Yuzawa (khứ hồi)</span><small><span class="l-ja">指定席eチケット 大人¥6,160 × 3、こども¥3,070 × 2 × 往復</span><span class="l-vi" lang="vi">NL 6.160 × 3, TE 3.070 × 2, × 2 chiều</span></small></td><td>¥49,240</td></tr><tr><td><span class="l-ja">リフト1日券（25-26の料金で参考）</span><span class="l-vi" lang="vi">Vé 1 ngày (giá mùa trước)</span><small><span class="l-ja">大人¥7,000 × 3、子ども¥4,800 × 2</span><span class="l-vi" lang="vi">NL 7.000 × 3, TE 4.800 × 2</span></small></td><td>¥30,600</td></tr><tr><td><span class="l-ja">駅⇔ホテルの送迎</span><span class="l-vi" lang="vi">Xe ga ⇔ khách sạn</span><small><span class="l-ja">無料送迎バス（約3分）</span><span class="l-vi" lang="vi">miễn phí</span></small></td><td>¥0</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥178,792 ／ ¥35,758</td></tr><tr class="rental"><td><span class="l-ja">レンタル</span><span class="l-vi" lang="vi">Thuê đồ</span><small><span class="l-ja">NASPAの今季料金は未確認</span><span class="l-vi" lang="vi">NASPAの今季料金は未確認</span></small></td><td>未確認</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://www.jalan.net/yad330823/plan/?stayYear=2026&amp;stayMonth=12&amp;stayDay=19&amp;stayCount=1&amp;roomCount=1&amp;adultNum=3&amp;child1Num=1&amp;child2Num=1" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>じゃらん</small></a><a class="btn sub" href="https://www.eki-net.com/" target="_blank" rel="noopener"><span class="l-ja">予約ページ</span><span class="l-vi" lang="vi">Trang đặt</span> <small>えきねっと（新幹線）</small></a>
+          <button class="btn show" type="button" data-show="p9"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p6" data-mode="train" data-area="niigata" data-plan="p6">
+        <div class="card-head"><div class="rank num">2</div><div>
+          <h3><span class="l-ja">上越国際＋ホテルグリーンプラザ上越（ファミリー限定・レンタル込み）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Hotel Green Plaza Joetsu (gói gia đình, gồm thuê đồ)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge fast"><span class="l-ja">ゲレンデ0分</span><span class="l-vi" lang="vi">Sát dốc</span></span><span class="badge "><span class="l-ja">★★★</span><span class="l-vi" lang="vi">★★★</span></span></div></div></div>
+        <p class="muted"><span class="stars">★★★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span> ・ ビッグホリデー</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>39,805</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">（レンタル込み）</span><span class="l-vi" lang="vi">(gồm thuê đồ)</span></div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み（2日目は別）</span><span class="l-vi" lang="vi">Gồm vé 1 ngày</span></p>
+        <p class="muted"><span class="l-ja">口コミ：</span><span class="l-vi" lang="vi">Đánh giá: </span><span class="l-ja">楽天 3.70（1,851件）／部屋3.38・夕食3.78・風呂3.70・清潔3.42</span><span class="l-vi" lang="vi">Rakuten 3,70 (1.851 đánh giá)</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">ゲレンデ直結。駅から宿泊者用の無料送迎（約25分・前日までに予約）</span><span class="l-vi" lang="vi">Sát dốc, xe miễn phí từ ga (~25 phút, đặt trước)</span></p><p class="pro"><span class="l-ja">リフト1日券＋スキーセット＋ウェア1日が込み</span><span class="l-vi" lang="vi">Gồm vé 1 ngày + ván + quần áo 1 ngày</span></p><p class="pro"><span class="l-ja">縁日・プール・キッズパラダイス券つき。天然温泉</span><span class="l-vi" lang="vi">Có lễ hội, hồ bơi, khu vui chơi trẻ em, suối nóng</span></p><p class="con"><span class="l-ja">ほかの新潟プランの約2倍の値段</span><span class="l-vi" lang="vi">Giá gần gấp đôi các gói khác</span></p><p class="con"><span class="l-ja">口コミでは建物の古さ・朝食の混雑（20分待ち）</span><span class="l-vi" lang="vi">Đánh giá: tòa nhà cũ, bữa sáng đông</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金（5人とも大人代金で上限計算）</span><span class="l-vi" lang="vi">Giá tour (tối đa)</span><small><span class="l-ja">¥41,900 × 5人（往復新幹線・宿2食バイキング・リフト1日・レンタル1日）</span><span class="l-vi" lang="vi">41.900 × 5</span></small></td><td>¥209,500</td></tr><tr><td><span class="l-ja">LINE友だち追加クーポン</span><span class="l-vi" lang="vi">Phiếu LINE</span><small><span class="l-ja">−5%</span><span class="l-vi" lang="vi">−5%</span></small></td><td>−¥10,475</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥199,025 ／ ¥39,805</td></tr><tr class="rental"><td><span class="l-ja">2日目のリフト・レンタル</span><span class="l-vi" lang="vi">Vé & thuê đồ ngày 2</span><small><span class="l-ja">現地で追加（料金は未確認）</span><span class="l-vi" lang="vi">現地で追加（料金は未確認）</span></small></td><td>未確認</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://www.bigs.jp/tourDetail?tourId=S59164C70701" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>ビッグホリデー</small></a>
+          <button class="btn show" type="button" data-show="p6"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p10" data-mode="train" data-area="nagano" data-plan="p10">
+        <div class="card-head"><div class="rank num">3</div><div>
+          <h3><span class="l-ja">軽井沢プリンス＋軽井沢プリンスホテル ウエスト（自分で手配）</span><span class="l-vi" lang="vi">Karuizawa Prince + Prince Hotel West (tự đặt)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge fast"><span class="l-ja">移動がいちばんラク</span><span class="l-vi" lang="vi">Di chuyển dễ nhất</span></span><span class="badge cheap"><span class="l-ja">小学生リフト無料</span><span class="l-vi" lang="vi">Tiểu học miễn phí</span></span></div></div></div>
+        <p class="muted"><span class="stars">★★</span> ・ <span class="l-ja">12/12（土）〜13（日）</span><span class="l-vi" lang="vi">12/12 – 13/12</span> ・ 楽天＋えきねっと</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>45,842</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥20,400</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">大人¥7,500（無料会員）・小学生まで無料</span><span class="l-vi" lang="vi">NL 7.500, tiểu học miễn phí</span></p>
+        <p class="muted"><span class="l-ja">口コミ：</span><span class="l-vi" lang="vi">Đánh giá: </span><span class="l-ja">楽天 4.38（3,019件）／部屋4.35・夕食4.58・風呂4.30・清潔4.40</span><span class="l-vi" lang="vi">Rakuten 4,38 (3.019)</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">軽井沢駅から無料シャトル。宿からゲレンデが近い</span><span class="l-vi" lang="vi">Xe miễn phí từ ga, gần khu trượt</span></p><p class="pro"><span class="l-ja">口コミ4.38（3,019件）・夕食4.58のブッフェ</span><span class="l-vi" lang="vi">Đánh giá 4,38, buffet tối 4,58</span></p><p class="pro"><span class="l-ja">12/12に確実に滑れる・スキー学校あり</span><span class="l-vi" lang="vi">Chắc chắn trượt được 12/12</span></p><p class="con"><span class="l-ja">宿代が高い（5人で約16.5万円）</span><span class="l-vi" lang="vi">Khách sạn đắt (~165.000 yên/5 người)</span></p><p class="con"><span class="l-ja">温泉が天然か未確認／新幹線の今の運賃が未確認</span><span class="l-vi" lang="vi">Chưa rõ suối nóng tự nhiên; giá tàu chưa cập nhật</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">宿（2食付き・禁煙・5人1室）</span><span class="l-vi" lang="vi">Khách sạn (2 bữa)</span><small><span class="l-ja">楽天 12/12泊</span><span class="l-vi" lang="vi">Rakuten 12/12</span></small></td><td>¥164,628</td></tr><tr><td><span class="l-ja">新幹線 大宮⇔軽井沢（往復・参考）</span><span class="l-vi" lang="vi">Tàu Omiya ⇔ Karuizawa (tham khảo)</span><small><span class="l-ja">指定席 大人¥5,260 × 3、こども¥2,630 × 2 × 往復（運賃改定前の参考額）</span><span class="l-vi" lang="vi">giá tham khảo trước khi tăng</span></small></td><td>¥42,080</td></tr><tr><td><span class="l-ja">リフト 大人1日券</span><span class="l-vi" lang="vi">Vé NL 1 ngày</span><small><span class="l-ja">¥7,500（無料会員の窓口料金・初滑り期間）× 3人（中学生は大人）</span><span class="l-vi" lang="vi">7.500 × 3</span></small></td><td>¥22,500</td></tr><tr><td><span class="l-ja">リフト 小学生</span><span class="l-vi" lang="vi">Vé tiểu học</span><small><span class="l-ja">無料</span><span class="l-vi" lang="vi">miễn phí</span></small></td><td>¥0</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥229,208 ／ ¥45,842</td></tr><tr class="rental"><td><span class="l-ja">2日目のリフト（大人）</span><span class="l-vi" lang="vi">Vé ngày 2 (NL)</span><small><span class="l-ja">¥7,500 × 3人</span><span class="l-vi" lang="vi">¥7,500 × 3人</span></small></td><td>+¥22,500</td></tr><tr class="rental"><td><span class="l-ja">レンタル（スキー場・Web事前決済）</span><span class="l-vi" lang="vi">Thuê đồ</span><small><span class="l-ja">大人¥11,000、こども¥9,000 / 日 × 2日</span><span class="l-vi" lang="vi">大人¥11,000、こども¥9,000 / 日 × 2日</span></small></td><td>+¥102,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/29249?f_nen1=2026&amp;f_tuki1=12&amp;f_hi1=12&amp;f_nen2=2026&amp;f_tuki2=12&amp;f_hi2=13&amp;f_heya_su=1&amp;f_otona_su=3&amp;f_s1=1&amp;f_s2=1" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>楽天トラベル</small></a><a class="btn sub" href="https://www.princehotels.co.jp/ski/karuizawa/winter/lift/advance_tickets/" target="_blank" rel="noopener"><span class="l-ja">予約ページ</span><span class="l-vi" lang="vi">Trang đặt</span> <small>リフト券（公式）</small></a>
+          <button class="btn show" type="button" data-show="p10"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p11" data-mode="car" data-area="nagano" data-plan="p11">
+        <div class="card-head"><div class="rank num">4</div><div>
+          <h3><span class="l-ja">軽井沢プリンス＋プリンスホテル ウエスト（レンタカー）</span><span class="l-vi" lang="vi">Karuizawa Prince + Prince Hotel West (thuê ô tô)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">車</span><span class="l-vi" lang="vi">Ô tô</span></span><span class="badge "><span class="l-ja">雪道が少ない</span><span class="l-vi" lang="vi">Ít đường tuyết</span></span></div></div></div>
+        <p class="muted"><span class="stars">★★</span> ・ <span class="l-ja">12/12（土）〜13（日）</span><span class="l-vi" lang="vi">12/12 – 13/12</span> ・ トヨタレンタカーほか</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>46,166</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥20,400</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">大人¥7,500・小学生まで無料</span><span class="l-vi" lang="vi">NL 7.500, TE miễn phí</span></p>
+        <p class="muted"><span class="l-ja">口コミ：</span><span class="l-vi" lang="vi">Đánh giá: </span><span class="l-ja">楽天 4.38（3,019件）</span><span class="l-vi" lang="vi">Rakuten 4,38</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">軽井沢は高速の出口から近く、雪道を走る距離が短い</span><span class="l-vi" lang="vi">Gần lối ra cao tốc, ít đường tuyết</span></p><p class="pro"><span class="l-ja">荷物が多くても家から直接行ける</span><span class="l-vi" lang="vi">Đi thẳng từ nhà, mang nhiều đồ</span></p><p class="con"><span class="l-ja">埼玉の店舗はスタッドレスが標準でない。追加料金と在庫が未確認</span><span class="l-vi" lang="vi">Cửa hàng ở Saitama không có sẵn lốp mùa đông; chưa rõ giá</span></p><p class="con"><span class="l-ja">新幹線より高く、運転の負担がある</span><span class="l-vi" lang="vi">Đắt hơn tàu, phải lái xe</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">レンタカー W2クラス（ミニバン）</span><span class="l-vi" lang="vi">Thuê xe W2 (minivan)</span><small><span class="l-ja">24時間¥20,900＋以降24時間¥15,400（トヨタ一般料金）</span><span class="l-vi" lang="vi">20.900 + 15.400</span></small></td><td>¥36,300</td></tr><tr><td><span class="l-ja">高速 練馬IC⇔碓氷軽井沢IC（往復・参考）</span><span class="l-vi" lang="vi">Cao tốc (khứ hồi, tham khảo)</span><small><span class="l-ja">普通車¥3,700 × 2（平日通常料金の参考。休日割引は都市部除く30%）</span><span class="l-vi" lang="vi">3.700 × 2</span></small></td><td>¥7,400</td></tr><tr><td><span class="l-ja">宿（2食付き・禁煙）</span><span class="l-vi" lang="vi">Khách sạn (2 bữa)</span><small><span class="l-ja">楽天 12/12泊</span><span class="l-vi" lang="vi">Rakuten</span></small></td><td>¥164,628</td></tr><tr><td><span class="l-ja">リフト 大人1日券</span><span class="l-vi" lang="vi">Vé NL 1 ngày</span><small><span class="l-ja">¥7,500 × 3人（小学生は無料）</span><span class="l-vi" lang="vi">7.500 × 3</span></small></td><td>¥22,500</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥230,828 ／ ¥46,166</td></tr><tr class="rental"><td><span class="l-ja">スタッドレスタイヤ・免責補償・ガソリン・駐車場</span><span class="l-vi" lang="vi">Lốp mùa đông, bảo hiểm, xăng, đỗ xe</span><small><span class="l-ja">店舗の見積もりで確認</span><span class="l-vi" lang="vi">店舗の見積もりで確認</span></small></td><td>未確認</td></tr><tr class="rental"><td><span class="l-ja">自家用車＋タイヤレンタルにする場合</span><span class="l-vi" lang="vi">Nếu dùng xe nhà + thuê lốp</span><small><span class="l-ja">レンタカー代の代わりにタイヤレンタル（例：2泊3日・脱着込み約¥13,000、サイズ次第）</span><span class="l-vi" lang="vi">~13.000 yên</span></small></td><td>−¥23,300前後</td></tr><tr class="rental"><td><span class="l-ja">レンタル（スキー場）</span><span class="l-vi" lang="vi">Thuê đồ</span><small><span class="l-ja">大人¥11,000、こども¥9,000 / 日 × 2日</span><span class="l-vi" lang="vi">大人¥11,000、こども¥9,000 / 日 × 2日</span></small></td><td>+¥102,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://rent.toyota.co.jp/" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トヨタレンタカー</small></a><a class="btn sub" href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/29249?f_nen1=2026&amp;f_tuki1=12&amp;f_hi1=12&amp;f_nen2=2026&amp;f_tuki2=12&amp;f_hi2=13&amp;f_heya_su=1&amp;f_otona_su=3&amp;f_s1=1&amp;f_s2=1" target="_blank" rel="noopener"><span class="l-ja">予約ページ</span><span class="l-vi" lang="vi">Trang đặt</span> <small>宿（楽天）</small></a>
+          <button class="btn show" type="button" data-show="p11"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p3" data-mode="bus" data-area="niigata" data-plan="p3">
+        <div class="card-head"><div class="rank num">5</div><div>
+          <h3><span class="l-ja">上越国際＋プチハウスひろみ（新宿発バスツアー）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Petit House Hiromi (tour xe buýt từ Shinjuku)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge cheap"><span class="l-ja">最安</span><span class="l-vi" lang="vi">Rẻ nhất</span></span><span class="badge "><span class="l-ja">バス</span><span class="l-vi" lang="vi">Xe buýt</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span> ・ トラベルイン</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>19,900</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥2,800</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み</span><span class="l-vi" lang="vi">Đã gồm vé 1 ngày</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">全候補でいちばん安い</span><span class="l-vi" lang="vi">Rẻ nhất trong tất cả</span></p><p class="pro"><span class="l-ja">宿・リフト・往復バスが1回の申込で済む</span><span class="l-vi" lang="vi">Một lần đặt gồm cả xe, chỗ ở, vé</span></p><p class="con"><span class="l-ja">新宿（都庁の大型バス駐車場）7:10発。志木からは6時台に出発</span><span class="l-vi" lang="vi">Xuất phát 7:10 ở Shinjuku. Phải rời Shiki khoảng 6 giờ sáng</span></p><p class="con"><span class="l-ja">新幹線ツアーとの差は1人¥600ほどで、移動は約3.5時間</span><span class="l-vi" lang="vi">Chỉ rẻ hơn tàu khoảng 600 yên/người, đi mất ~3,5 giờ</span></p><p class="con"><span class="l-ja">池袋・大宮発のバスは見つからず</span><span class="l-vi" lang="vi">Không tìm thấy xe từ Ikebukuro/Omiya</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金 大人</span><span class="l-vi" lang="vi">Giá tour người lớn</span><small><span class="l-ja">¥19,900 × 3人（往復バス・宿2食・リフト1日券）</span><span class="l-vi" lang="vi">19.900 × 3</span></small></td><td>¥59,700</td></tr><tr><td><span class="l-ja">ツアー代金 小学生（上限）</span><span class="l-vi" lang="vi">Giá tour trẻ em (tối đa)</span><small><span class="l-ja">¥19,900 × 2人（こども代金は未確認）</span><span class="l-vi" lang="vi">19.900 × 2</span></small></td><td>¥39,800</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥99,500 ／ ¥19,900</td></tr><tr class="rental"><td><span class="l-ja">レンタル（全員）</span><span class="l-vi" lang="vi">Thuê đồ</span><small><span class="l-ja">¥700 × 2点 × 2日 × 5人</span><span class="l-vi" lang="vi">700 × 2 × 2 × 5</span></small></td><td>+¥14,000</td></tr><tr class="rental"><td><span class="l-ja">志木⇔新宿の電車</span><span class="l-vi" lang="vi">Tàu Shiki ⇔ Shinjuku</span><small><span class="l-ja">各自（往復）</span><span class="l-vi" lang="vi">tự trả</span></small></td><td>別途</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=410&amp;c1=18&amp;c2=3011&amp;c3=021001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トラベルイン</small></a>
+          <button class="btn show" type="button" data-show="p3"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p4" data-mode="bus" data-area="niigata" data-plan="p4">
+        <div class="card-head"><div class="rank num">6</div><div>
+          <h3><span class="l-ja">石打丸山＋アーバンヒル石打（新宿発バスツアー）</span><span class="l-vi" lang="vi">Ishiuchi + Urban Hill Ishiuchi (xe buýt từ Shinjuku)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">バス</span><span class="l-vi" lang="vi">Xe buýt</span></span><span class="badge "><span class="l-ja">ゲレンデ徒歩1分</span><span class="l-vi" lang="vi">Ra dốc 1 phút</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span> ・ トラベルイン</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>20,500</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥2,800</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み</span><span class="l-vi" lang="vi">Đã gồm vé 1 ngày</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">おすすめ（p1）と同じ宿をバスで。バス停から徒歩1分</span><span class="l-vi" lang="vi">Cùng khách sạn với gói đề xuất, đi xe buýt</span></p><p class="pro"><span class="l-ja">温泉・鍋食べ放題・全室禁煙</span><span class="l-vi" lang="vi">Suối nóng, lẩu ăn thoải mái, cấm hút thuốc</span></p><p class="con"><span class="l-ja">新幹線ツアーとの差は1人¥660ほど</span><span class="l-vi" lang="vi">Chỉ rẻ hơn tàu khoảng 660 yên/người</span></p><p class="con"><span class="l-ja">新宿7:10発・20:50着</span><span class="l-vi" lang="vi">Đi 7:10, về 20:50</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金 大人</span><span class="l-vi" lang="vi">Giá người lớn</span><small><span class="l-ja">¥20,500 × 3人</span><span class="l-vi" lang="vi">20.500 × 3</span></small></td><td>¥61,500</td></tr><tr><td><span class="l-ja">ツアー代金 小学生（上限）</span><span class="l-vi" lang="vi">Giá trẻ em (tối đa)</span><small><span class="l-ja">¥20,500 × 2人</span><span class="l-vi" lang="vi">20.500 × 2</span></small></td><td>¥41,000</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥102,500 ／ ¥20,500</td></tr><tr class="rental"><td><span class="l-ja">2日券に変更</span><span class="l-vi" lang="vi">Đổi vé 2 ngày</span><small><span class="l-ja">大人 +¥4,100〜5,400、こども +¥2,400〜3,000</span><span class="l-vi" lang="vi">大人 +¥4,100〜5,400、こども +¥2,400〜3,000</span></small></td><td>+¥17,100〜22,200</td></tr><tr class="rental"><td><span class="l-ja">レンタル（全員）</span><span class="l-vi" lang="vi">Thuê đồ</span><small><span class="l-ja">¥700 × 2点 × 2日 × 5人</span><span class="l-vi" lang="vi">¥700 × 2点 × 2日 × 5人</span></small></td><td>+¥14,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=410&amp;c1=18&amp;c2=2811&amp;c3=046001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トラベルイン</small></a>
+          <button class="btn show" type="button" data-show="p4"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p2" data-mode="train" data-area="niigata" data-plan="p2">
+        <div class="card-head"><div class="rank num">7</div><div>
+          <h3><span class="l-ja">上越国際＋プチハウスひろみ（新幹線ツアー）</span><span class="l-vi" lang="vi">Joetsu Kokusai + Petit House Hiromi (tour Shinkansen)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge fast"><span class="l-ja">新幹線で最安</span><span class="l-vi" lang="vi">Rẻ nhất bằng tàu</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span> ・ トラベルイン</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>20,560</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥2,800</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み（上越国際＆岩原）</span><span class="l-vi" lang="vi">Đã gồm vé 1 ngày</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">新幹線ツアーでいちばん安い</span><span class="l-vi" lang="vi">Rẻ nhất trong các tour tàu</span></p><p class="pro"><span class="l-ja">上越国際は広く、初心者コースが多い</span><span class="l-vi" lang="vi">Khu Joetsu Kokusai rộng, nhiều dốc cho người mới</span></p><p class="pro"><span class="l-ja">全室禁煙・レンタル1日700円/点</span><span class="l-vi" lang="vi">Cấm hút thuốc toàn bộ, thuê đồ 700 yên/món/ngày</span></p><p class="con"><span class="l-ja">ペンションのため温泉・口コミは未確認</span><span class="l-vi" lang="vi">Là nhà nghỉ nhỏ, chưa xác nhận suối nóng/đánh giá</span></p><p class="con"><span class="l-ja">駅からの行き方・2日券の追加額は予約画面で確認</span><span class="l-vi" lang="vi">Cách đi từ ga và giá vé 2 ngày cần xem khi đặt</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金 大人</span><span class="l-vi" lang="vi">Giá tour người lớn</span><small><span class="l-ja">¥21,200 × 3人</span><span class="l-vi" lang="vi">21.200 × 3</span></small></td><td>¥63,600</td></tr><tr><td><span class="l-ja">ツアー代金 小学生（上限）</span><span class="l-vi" lang="vi">Giá tour trẻ em (tối đa)</span><small><span class="l-ja">¥21,200 × 2人（こども代金は未確認）</span><span class="l-vi" lang="vi">21.200 × 2 (chưa rõ giá trẻ em)</span></small></td><td>¥42,400</td></tr><tr><td><span class="l-ja">大宮乗車割引</span><span class="l-vi" lang="vi">Giảm giá Omiya</span><small><span class="l-ja">大人 −¥800 × 3、こども −¥400 × 2</span><span class="l-vi" lang="vi">NL −800×3, TE −400×2</span></small></td><td>−¥3,200</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥102,800 ／ ¥20,560</td></tr><tr class="rental"><td><span class="l-ja">レンタル（全員）</span><span class="l-vi" lang="vi">Thuê đồ (cả nhà)</span><small><span class="l-ja">板セット＋ウェア ¥700 × 2日 × 5人</span><span class="l-vi" lang="vi">700 × 2 ngày × 5</span></small></td><td>+¥14,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=3021&amp;c3=021001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トラベルイン</small></a>
+          <button class="btn show" type="button" data-show="p2"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card selected" id="card-p1" data-mode="train" data-area="niigata" data-plan="p1">
+        <div class="card-head"><div class="rank num">8</div><div>
+          <h3><span class="l-ja">石打丸山＋アーバンヒル石打（新幹線ツアー）</span><span class="l-vi" lang="vi">Ishiuchi Maruyama + Urban Hill Ishiuchi (tour tàu Shinkansen)</span></h3>
+          <div class="badges"><span class="badge viewing"><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge best"><span class="l-ja">おすすめ</span><span class="l-vi" lang="vi">Đề xuất</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge "><span class="l-ja">ゲレンデ徒歩1分</span><span class="l-vi" lang="vi">Ra dốc 1 phút</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 (T7) – 20/12 (CN)</span> ・ トラベルイン</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>21,160</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥2,800</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み（2日券は追加）。小学生はこども料金</span><span class="l-vi" lang="vi">Đã gồm vé 1 ngày (vé 2 ngày trả thêm)</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">ゲレンデまで徒歩1分。温泉つき・全室禁煙</span><span class="l-vi" lang="vi">Đi bộ 1 phút ra dốc. Có suối nóng, toàn bộ phòng cấm hút thuốc</span></p><p class="pro"><span class="l-ja">夕食は日替わり鍋の食べ放題</span><span class="l-vi" lang="vi">Bữa tối: lẩu thay đổi mỗi ngày, ăn thoải mái</span></p><p class="pro"><span class="l-ja">レンタルが1日700円/点と格安（板・ウェア）</span><span class="l-vi" lang="vi">Thuê đồ rất rẻ: 700 yên/món/ngày (ván trượt, quần áo)</span></p><p class="pro"><span class="l-ja">大宮から乗れて往復で¥3,200引き</span><span class="l-vi" lang="vi">Lên tàu ở Omiya, giảm 3.200 yên cho cả nhà</span></p><p class="con"><span class="l-ja">子どものスキースクールは12/30から（大人クラスは小学生から参加可・2時間¥6,000）</span><span class="l-vi" lang="vi">Lớp trượt cho trẻ em chỉ từ 30/12 (lớp người lớn nhận học sinh tiểu học, 2 giờ 6.000 yên)</span></p><p class="con"><span class="l-ja">小学生のこども代金は予約画面でしか出ない（下の金額は上限）</span><span class="l-vi" lang="vi">Giá trẻ em chỉ hiện khi đặt chỗ (số tiền dưới đây là mức tối đa)</span></p><p class="con"><span class="l-ja">12/19が石打のオープン予定日か公式で未確認</span><span class="l-vi" lang="vi">Chưa xác nhận chính thức 19/12 là ngày mở cửa của Ishiuchi</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金 大人（中学生を含む）</span><span class="l-vi" lang="vi">Giá tour người lớn (gồm học sinh THCS)</span><small><span class="l-ja">¥21,800 × 3人（往復新幹線・宿2食・リフト1日券）</span><span class="l-vi" lang="vi">21.800 × 3 (tàu khứ hồi, 2 bữa, vé 1 ngày)</span></small></td><td>¥65,400</td></tr><tr><td><span class="l-ja">ツアー代金 小学生</span><span class="l-vi" lang="vi">Giá tour học sinh tiểu học</span><small><span class="l-ja">こども代金は未確認のため大人代金で上限計算 ¥21,800 × 2人</span><span class="l-vi" lang="vi">Chưa rõ giá trẻ em, tạm tính bằng giá người lớn 21.800 × 2</span></small></td><td>¥43,600</td></tr><tr><td><span class="l-ja">大宮乗車割引</span><span class="l-vi" lang="vi">Giảm giá lên tàu ở Omiya</span><small><span class="l-ja">大人 −¥800 × 3、こども −¥400 × 2</span><span class="l-vi" lang="vi">NL −800 × 3, TE −400 × 2</span></small></td><td>−¥3,200</td></tr><tr><td><span class="l-ja">越後湯沢駅⇔石打 シャトル</span><span class="l-vi" lang="vi">Xe đưa đón ga Echigo-Yuzawa ⇔ Ishiuchi</span><small><span class="l-ja">スキー場の無料シャトル 約20分</span><span class="l-vi" lang="vi">Xe miễn phí của khu trượt, ~20 phút</span></small></td><td>¥0</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥105,800 ／ ¥21,160</td></tr><tr class="rental"><td><span class="l-ja">2日目もリフトに乗る（2日券に変更）</span><span class="l-vi" lang="vi">Nếu đổi sang vé 2 ngày</span><small><span class="l-ja">大人 +¥4,100〜5,400 × 3、こども +¥2,400〜3,000 × 2</span><span class="l-vi" lang="vi">NL +4.100–5.400 × 3, TE +2.400–3.000 × 2</span></small></td><td>+¥17,100〜22,200</td></tr><tr class="rental"><td><span class="l-ja">レンタル（全員）</span><span class="l-vi" lang="vi">Thuê đồ (cả nhà)</span><small><span class="l-ja">スキーセット＋ウェア 各¥700 × 2日 × 5人（予約時に申込）</span><span class="l-vi" lang="vi">Bộ ván + quần áo, 700 × 2 ngày × 5 người</span></small></td><td>+¥14,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=2821&amp;c3=046001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トラベルイン</small></a>
+          <button class="btn show" type="button" data-show="p1"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p5" data-mode="train" data-area="niigata" data-plan="p5">
+        <div class="card-head"><div class="rank num">9</div><div>
+          <h3><span class="l-ja">石打丸山＋アーバンヒル石打（ビッグホリデー・レンタル込み）</span><span class="l-vi" lang="vi">Ishiuchi + Urban Hill (Big Holiday, đã gồm thuê đồ)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge "><span class="l-ja">レンタル込み</span><span class="l-vi" lang="vi">Gồm thuê đồ</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/19（土）〜20（日）</span><span class="l-vi" lang="vi">19/12 – 20/12</span> ・ ビッグホリデー</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>22,610</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">（レンタル込み）</span><span class="l-vi" lang="vi">(gồm thuê đồ)</span></div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">予約画面で選択（未確認）</span><span class="l-vi" lang="vi">Chọn khi đặt (chưa rõ)</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">スキーセットとウェアが滞在中ずっと込み</span><span class="l-vi" lang="vi">Đã gồm ván và quần áo suốt thời gian ở</span></p><p class="pro"><span class="l-ja">LINE友だち追加で5%引き（誰でも可）</span><span class="l-vi" lang="vi">Giảm 5% khi kết bạn LINE</span></p><p class="con"><span class="l-ja">リフト券が代金に入るか、キャンセル料が公式で未確認</span><span class="l-vi" lang="vi">Chưa rõ đã gồm vé cáp treo chưa, và phí hủy</span></p><p class="con"><span class="l-ja">こども代金は予約画面で確定</span><span class="l-vi" lang="vi">Giá trẻ em chỉ rõ khi đặt</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金（5人とも大人代金で上限計算）</span><span class="l-vi" lang="vi">Giá tour (tính tối đa theo giá NL)</span><small><span class="l-ja">¥23,800 × 5人</span><span class="l-vi" lang="vi">23.800 × 5</span></small></td><td>¥119,000</td></tr><tr><td><span class="l-ja">LINE友だち追加クーポン</span><span class="l-vi" lang="vi">Phiếu giảm giá LINE</span><small><span class="l-ja">−5%</span><span class="l-vi" lang="vi">−5%</span></small></td><td>−¥5,950</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥113,050 ／ ¥22,610</td></tr><tr class="rental"><td><span class="l-ja">リフト券</span><span class="l-vi" lang="vi">Vé cáp treo</span><small><span class="l-ja">予約画面で選択（込みかどうか未確認）</span><span class="l-vi" lang="vi">chọn khi đặt</span></small></td><td>未確認</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://www.bigs.jp/tourDetail?tourId=S59164C62401" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>ビッグホリデー</small></a>
+          <button class="btn show" type="button" data-show="p5"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p7" data-mode="train" data-area="nagano" data-plan="p7">
+        <div class="card-head"><div class="rank num">10</div><div>
+          <h3><span class="l-ja">軽井沢プリンス＋ホテル軽井沢1130（新幹線ツアー）</span><span class="l-vi" lang="vi">Karuizawa Prince + Hotel Karuizawa 1130 (tour Shinkansen)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge fast"><span class="l-ja">12/12に滑れる</span><span class="l-vi" lang="vi">Trượt được 12/12</span></span><span class="badge cheap"><span class="l-ja">小学生リフト無料</span><span class="l-vi" lang="vi">Tiểu học miễn phí cáp treo</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/12（土）〜13（日）</span><span class="l-vi" lang="vi">12/12 – 13/12</span> ・ トラベルイン</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>32,400</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥20,400</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み。小学生までは無料</span><span class="l-vi" lang="vi">Gồm vé 1 ngày; tiểu học miễn phí</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">12/12の週末に確実に滑れる（10/31から人工雪で営業中）</span><span class="l-vi" lang="vi">Chắc chắn trượt được cuối tuần 12/12 (mở từ 31/10, tuyết nhân tạo)</span></p><p class="pro"><span class="l-ja">全14コース中8コースが初心者向け。スキー学校は12/1から開講</span><span class="l-vi" lang="vi">8/14 đường trượt cho người mới. Trường trượt mở từ 1/12</span></p><p class="pro"><span class="l-ja">大宮から新幹線で約45分</span><span class="l-vi" lang="vi">Từ Omiya ~45 phút bằng tàu</span></p><p class="con"><span class="l-ja">宿はスキー場から送迎40分＋シャトル5分（送迎は前日18時までに予約）</span><span class="l-vi" lang="vi">Khách sạn cách khu trượt 40 phút xe đưa đón (đặt trước 18h hôm trước)</span></p><p class="con"><span class="l-ja">レンタルが高い（大人セット＋ウェア1日¥11,000）</span><span class="l-vi" lang="vi">Thuê đồ đắt (NL 11.000 yên/ngày)</span></p><p class="con"><span class="l-ja">宿の口コミは未調査</span><span class="l-vi" lang="vi">Chưa kiểm tra đánh giá khách sạn</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金 大人（中学生を含む）</span><span class="l-vi" lang="vi">Giá người lớn</span><small><span class="l-ja">¥32,400 × 3人（往復新幹線・宿2食バイキング・リフト1日券）</span><span class="l-vi" lang="vi">32.400 × 3</span></small></td><td>¥97,200</td></tr><tr><td><span class="l-ja">ツアー代金 小学生（上限）</span><span class="l-vi" lang="vi">Giá trẻ em (tối đa)</span><small><span class="l-ja">¥32,400 × 2人（こども代金は未確認）</span><span class="l-vi" lang="vi">32.400 × 2</span></small></td><td>¥64,800</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥162,000 ／ ¥32,400</td></tr><tr class="rental"><td><span class="l-ja">2日券に変更</span><span class="l-vi" lang="vi">Đổi vé 2 ngày</span><small><span class="l-ja">大人 +¥6,000〜12,000 × 3（こどもは追加なし）</span><span class="l-vi" lang="vi">NL +6.000–12.000 × 3</span></small></td><td>+¥18,000〜36,000</td></tr><tr class="rental"><td><span class="l-ja">レンタル（スキー場・Web事前決済）</span><span class="l-vi" lang="vi">Thuê đồ (đặt trước trên web)</span><small><span class="l-ja">大人 セット¥6,500＋ウェア¥4,500、こども ¥5,500＋¥3,500 × 2日</span><span class="l-vi" lang="vi">NL 11.000, TE 9.000 × 2 ngày</span></small></td><td>+¥102,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=5021&amp;c3=011011&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トラベルイン</small></a>
+          <button class="btn show" type="button" data-show="p7"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article>
+      <article class="card" id="card-p8" data-mode="train" data-area="nagano" data-plan="p8">
+        <div class="card-head"><div class="rank num">11</div><div>
+          <h3><span class="l-ja">白馬五竜＆Hakuba47＋白馬パークホテル（新幹線ツアー）</span><span class="l-vi" lang="vi">Hakuba Goryu & 47 + Hakuba Park Hotel (tour Shinkansen)</span></h3>
+          <div class="badges"><span class="badge viewing" hidden><span class="l-ja">表示中</span><span class="l-vi" lang="vi">Đang xem</span></span><span class="badge "><span class="l-ja">新幹線</span><span class="l-vi" lang="vi">Shinkansen</span></span><span class="badge "><span class="l-ja">12/12に滑れる</span><span class="l-vi" lang="vi">Trượt được 12/12</span></span></div></div></div>
+        <p class="muted"><span class="stars">★</span> ・ <span class="l-ja">12/12（土）〜13（日）</span><span class="l-vi" lang="vi">12/12 – 13/12</span> ・ トラベルイン</p>
+        <div class="price-row"><div class="price-big num"><span class="yen">¥</span>32,520</div><div class="price-unit"><span class="l-ja">1人あたり（上限）</span><span class="l-vi" lang="vi">mỗi người (tối đa)</span> <span class="l-ja">＋レンタル</span><span class="l-vi" lang="vi">+ thuê đồ</span> ¥2,800</div></div>
+        <p class="muted"><span class="l-ja">リフト：</span><span class="l-vi" lang="vi">Vé: </span><span class="l-ja">1日券込み（五竜＆47共通）</span><span class="l-vi" lang="vi">Gồm vé 1 ngày</span></p>
+        <p class="muted"><span class="l-ja">口コミ：楽天で未調査（★は「確かめられた特長が少ない」という意味）</span><span class="l-vi" lang="vi">Đánh giá: chưa kiểm tra</span></p>
+        <div class="pc"><p class="pro"><span class="l-ja">12/12の週末に販売あり。全室禁煙</span><span class="l-vi" lang="vi">Có bán cho cuối tuần 12/12, cấm hút thuốc</span></p><p class="pro"><span class="l-ja">レンタル1日700円/点。大宮割引 大人¥2,800</span><span class="l-vi" lang="vi">Thuê đồ 700 yên; giảm 2.800 yên ở Omiya</span></p><p class="con"><span class="l-ja">長野駅⇔白馬のバスが片道¥3,500（各自・要予約）</span><span class="l-vi" lang="vi">Xe buýt Nagano ⇔ Hakuba 3.500 yên/lượt (tự đặt)</span></p><p class="con"><span class="l-ja">片道3時間半近くかかる</span><span class="l-vi" lang="vi">Mất gần 3,5 giờ mỗi chiều</span></p></div>
+        <details><summary><span class="l-ja">料金の内訳を見る</span><span class="l-vi" lang="vi">Xem chi tiết giá</span></summary><table class="breakdown"><tr><td><span class="l-ja">ツアー代金（5人とも大人代金で上限計算）</span><span class="l-vi" lang="vi">Giá tour (tối đa)</span><small><span class="l-ja">¥27,200 × 5人</span><span class="l-vi" lang="vi">27.200 × 5</span></small></td><td>¥136,000</td></tr><tr><td><span class="l-ja">大宮乗車割引（大人）</span><span class="l-vi" lang="vi">Giảm Omiya (NL)</span><small><span class="l-ja">−¥2,800 × 3人</span><span class="l-vi" lang="vi">−2.800 × 3</span></small></td><td>−¥8,400</td></tr><tr><td><span class="l-ja">長野駅⇔白馬の特急バス（往復・上限）</span><span class="l-vi" lang="vi">Xe buýt Nagano ⇔ Hakuba</span><small><span class="l-ja">¥3,500 × 2回 × 5人（こども運賃は未確認）</span><span class="l-vi" lang="vi">3.500 × 2 × 5</span></small></td><td>¥35,000</td></tr><tr class="total"><td><span class="l-ja">合計（5人・上限） ／ 1人あたり</span><span class="l-vi" lang="vi">Tổng (5 người, tối đa) / mỗi người</span></td><td>¥162,600 ／ ¥32,520</td></tr><tr class="rental"><td><span class="l-ja">レンタル（全員）</span><span class="l-vi" lang="vi">Thuê đồ</span><small><span class="l-ja">¥700 × 2点 × 2日 × 5人</span><span class="l-vi" lang="vi">¥700 × 2点 × 2日 × 5人</span></small></td><td>+¥14,000</td></tr></table></details>
+        <div class="btns">
+          <a class="btn" href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=8521&amp;c3=006001&amp;br=5G" target="_blank" rel="noopener"><span class="l-ja">このプランを予約</span><span class="l-vi" lang="vi">Đặt gói này</span> <small>トラベルイン</small></a>
+          <button class="btn show" type="button" data-show="p8"><span class="l-ja">日程・キャンセル料を見る</span><span class="l-vi" lang="vi">Xem lịch trình & phí hủy</span></button>
+        </div>
+      </article></div>
+    <div class="more"><details><summary><span class="l-ja">そのほかの候補（概要）</span><span class="l-vi" lang="vi">Các lựa chọn khác</span></summary><ul><li><a href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=6021&amp;c3=016001&amp;br=5G" target="_blank" rel="noopener">志賀高原＋志賀ハイランドホテル（新幹線ツアー）</a>：大人¥27,200〜（12/12）。長野駅からのバス代が別で未確認</li><li><a href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=7221&amp;c3=031001&amp;br=5G" target="_blank" rel="noopener">野沢温泉＋ナイス信濃荘（新幹線ツアー）</a>：大人¥27,700〜（12/12）。駅からのバス代が別で未確認</li><li><a href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=2721&amp;c3=001001&amp;br=5G" target="_blank" rel="noopener">苗場＋シュプールイン苗場（新幹線ツアー）</a>：大人¥27,500〜（12/19）。苗場は小学生リフト無料・中学生は中高生料金</li><li><a href="https://www.jalan.net/yad378210/plan/" target="_blank" rel="noopener">上越国際＋グリーンプラザ上越（トラベルイン）</a>：大人¥31,900〜（12/19・1日券付き）。レンタルは別。BHのレンタル込み版（p6）と比べる</li><li><a href="https://www.jalan.net/yad355725/plan/" target="_blank" rel="noopener">湯沢東映ホテル（自分で手配）</a>：★★★ 4.09。5人1室 12/19 ¥87,780（じゃらん）。湯沢高原のリフト料金が未確認</li><li><a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/30694" target="_blank" rel="noopener">苗場プリンスホテル（自分で手配）</a>：★★★ 3.65。5人1室なし・2室で12/19 ¥130,881。小学生リフト無料</li><li><a href="https://www.jalan.net/yad321447/plan/" target="_blank" rel="noopener">ホテルグリーンプラザ白馬（自分で手配）</a>：★★★ 4.25。12/12 ¥69,300（じゃらん・5人）。白馬乗鞍の12/12営業が未確認</li></ul></details></div>
+  </section>
+  <section id="schedule"><h2><span class="l-ja">日程</span><span class="l-vi" lang="vi">Lịch trình</span></h2><div class="viewing-bar"><span class="l-ja">表示中：</span><span class="l-vi" lang="vi">Đang xem: </span><b data-plan-name></b></div><div class="plan-block" data-plan="p9" hidden><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">7:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から上越新幹線</span><span class="l-vi" lang="vi">Tàu từ Omiya</span></span></li><li class=""><span class="t">8:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">越後湯沢 → 無料送迎でNASPA（約3分）・荷物を預けて滑走</span><span class="l-vi" lang="vi">Xe miễn phí đến NASPA, trượt</span></span></li><li class=""><span class="t">17:30〜</span><span class="dot"></span><span class="what"><span class="l-ja">ビュッフェ夕食（〜20:00）・温泉</span><span class="l-vi" lang="vi">Buffet tối, suối nóng</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class=""><span class="t">朝</span><span class="dot"></span><span class="what"><span class="l-ja">朝食ビュッフェ → 滑走</span><span class="l-vi" lang="vi">Ăn sáng → trượt</span></span></li><li class="key"><span class="t">16:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">送迎で越後湯沢 → 大宮</span><span class="l-vi" lang="vi">Về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p6" hidden><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">朝</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から新幹線</span><span class="l-vi" lang="vi">Tàu từ Omiya</span></span></li><li class=""><span class="t">午前</span><span class="dot"></span><span class="what"><span class="l-ja">越後湯沢から宿の無料送迎（約25分）→ 滑走</span><span class="l-vi" lang="vi">Xe miễn phí ~25 phút → trượt</span></span></li><li class=""><span class="t">夜</span><span class="dot"></span><span class="what"><span class="l-ja">夕食バイキング・縁日</span><span class="l-vi" lang="vi">Buffet tối, lễ hội</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class="key"><span class="t">午後</span><span class="dot"></span><span class="what"><span class="l-ja">送迎で越後湯沢 → 大宮</span><span class="l-vi" lang="vi">Về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p10" hidden><div class="day"><h3><span class="l-ja">1日目 12/12（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">7:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から北陸新幹線</span><span class="l-vi" lang="vi">Tàu từ Omiya</span></span></li><li class=""><span class="t">8:15頃</span><span class="dot"></span><span class="what"><span class="l-ja">軽井沢駅着 → 無料シャトル → 滑走</span><span class="l-vi" lang="vi">Đến ga → xe miễn phí → trượt</span></span></li><li class="key"><span class="t">17:30〜</span><span class="dot"></span><span class="what"><span class="l-ja">ブッフェ夕食（要予約）・温泉棟</span><span class="l-vi" lang="vi">Buffet tối, suối nóng</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/13（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class=""><span class="t">終日</span><span class="dot"></span><span class="what"><span class="l-ja">滑走・アウトレット</span><span class="l-vi" lang="vi">Trượt, mua sắm outlet</span></span></li><li class="key"><span class="t">17:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">軽井沢 → 大宮</span><span class="l-vi" lang="vi">Về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p11" hidden><div class="day"><h3><span class="l-ja">1日目 12/12（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">6:00</span><span class="dot"></span><span class="what"><span class="l-ja">志木周辺の店舗で車を借りる</span><span class="l-vi" lang="vi">Nhận xe ở Shiki</span></span></li><li class=""><span class="t">6:20頃</span><span class="dot"></span><span class="what"><span class="l-ja">所沢IC → 関越道 → 上信越道</span><span class="l-vi" lang="vi">Lên cao tốc ở Tokorozawa</span></span></li><li class=""><span class="t">8:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">碓氷軽井沢IC → スキー場（駐車場は宿泊者用を確認）</span><span class="l-vi" lang="vi">Đến khu trượt</span></span></li><li class=""><span class="t">夜</span><span class="dot"></span><span class="what"><span class="l-ja">ホテルで夕食</span><span class="l-vi" lang="vi">Ăn tối ở khách sạn</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/13（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class=""><span class="t">15:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">スキー場発</span><span class="l-vi" lang="vi">Rời khu trượt</span></span></li><li class="key"><span class="t">18:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">店舗に返却（渋滞で遅れる場合あり）</span><span class="l-vi" lang="vi">Trả xe</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p3" hidden><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1 – 19/12</span></h3><ol class="timeline"><li class="key"><span class="t">7:10</span><span class="dot"></span><span class="what"><span class="l-ja">新宿 都庁大型バス駐車場 発</span><span class="l-vi" lang="vi">Xuất phát bãi xe buýt Tochō, Shinjuku</span></span></li><li class=""><span class="t">10:40頃</span><span class="dot"></span><span class="what"><span class="l-ja">現地着・滑走</span><span class="l-vi" lang="vi">Đến nơi, trượt tuyết</span></span></li><li class=""><span class="t">夕方</span><span class="dot"></span><span class="what"><span class="l-ja">チェックイン・夕食</span><span class="l-vi" lang="vi">Nhận phòng, ăn tối</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2 – 20/12</span></h3><ol class="timeline"><li class=""><span class="t">16:35頃</span><span class="dot"></span><span class="what"><span class="l-ja">現地発</span><span class="l-vi" lang="vi">Rời khu trượt</span></span></li><li class="key"><span class="t">20:50頃</span><span class="dot"></span><span class="what"><span class="l-ja">新宿着・解散</span><span class="l-vi" lang="vi">Về Shinjuku, giải tán</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p4" hidden><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">7:10</span><span class="dot"></span><span class="what"><span class="l-ja">新宿発</span><span class="l-vi" lang="vi">Xuất phát Shinjuku</span></span></li><li class=""><span class="t">10:40頃</span><span class="dot"></span><span class="what"><span class="l-ja">石打着・滑走</span><span class="l-vi" lang="vi">Đến Ishiuchi, trượt</span></span></li><li class=""><span class="t">夜</span><span class="dot"></span><span class="what"><span class="l-ja">鍋食べ放題</span><span class="l-vi" lang="vi">Lẩu ăn thoải mái</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class=""><span class="t">16:35頃</span><span class="dot"></span><span class="what"><span class="l-ja">現地発</span><span class="l-vi" lang="vi">Rời khu trượt</span></span></li><li class="key"><span class="t">20:50頃</span><span class="dot"></span><span class="what"><span class="l-ja">新宿着</span><span class="l-vi" lang="vi">Về Shinjuku</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p2" hidden><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1 – 19/12</span></h3><ol class="timeline"><li class="key"><span class="t">7:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から上越新幹線</span><span class="l-vi" lang="vi">Tàu Shinkansen từ Omiya</span></span></li><li class=""><span class="t">8:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">越後湯沢駅着 → 上越国際へ（行き方は行程表で確認）</span><span class="l-vi" lang="vi">Đến Echigo-Yuzawa → đi Joetsu Kokusai</span></span></li><li class="key"><span class="t">夕方</span><span class="dot"></span><span class="what"><span class="l-ja">ペンションにチェックイン・夕食</span><span class="l-vi" lang="vi">Nhận phòng, ăn tối</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2 – 20/12</span></h3><ol class="timeline"><li class=""><span class="t">朝</span><span class="dot"></span><span class="what"><span class="l-ja">朝食 → 滑走</span><span class="l-vi" lang="vi">Ăn sáng → trượt</span></span></li><li class="key"><span class="t">17:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅着</span><span class="l-vi" lang="vi">Về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p1"><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1 – 19/12</span></h3><ol class="timeline"><li class="key"><span class="t">7:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から上越新幹線（列車は1か月前に決定）</span><span class="l-vi" lang="vi">Đi tàu Joetsu Shinkansen từ ga Omiya (giờ tàu chốt trước 1 tháng)</span></span></li><li class=""><span class="t">8:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">越後湯沢駅着 → 無料シャトルで石打へ（約20分）</span><span class="l-vi" lang="vi">Đến Echigo-Yuzawa → xe miễn phí đến Ishiuchi (~20 phút)</span></span></li><li class=""><span class="t">9:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">レンタル受け取り・滑走（宿で着替え可）</span><span class="l-vi" lang="vi">Nhận đồ thuê, trượt tuyết</span></span></li><li class=""><span class="t">夕方</span><span class="dot"></span><span class="what"><span class="l-ja">アーバンヒル石打にチェックイン・温泉</span><span class="l-vi" lang="vi">Nhận phòng, tắm suối nóng</span></span></li><li class="key"><span class="t">夜</span><span class="dot"></span><span class="what"><span class="l-ja">鍋食べ放題の夕食</span><span class="l-vi" lang="vi">Bữa tối lẩu ăn thoải mái</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2 – 20/12</span></h3><ol class="timeline"><li class=""><span class="t">朝</span><span class="dot"></span><span class="what"><span class="l-ja">和朝食 → 滑走（2日券にした場合）</span><span class="l-vi" lang="vi">Ăn sáng kiểu Nhật → trượt (nếu mua vé 2 ngày)</span></span></li><li class=""><span class="t">15:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">シャトルで越後湯沢へ</span><span class="l-vi" lang="vi">Xe về ga Echigo-Yuzawa</span></span></li><li class="key"><span class="t">17:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅着（列車は予約時に選択）</span><span class="l-vi" lang="vi">Về ga Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p5" hidden><div class="day"><h3><span class="l-ja">1日目 12/19（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">朝</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から新幹線（列車は1か月前に決定）</span><span class="l-vi" lang="vi">Tàu từ Omiya</span></span></li><li class=""><span class="t">午前</span><span class="dot"></span><span class="what"><span class="l-ja">越後湯沢 → 石打。レンタル受け取り・滑走</span><span class="l-vi" lang="vi">Đến Ishiuchi, nhận đồ, trượt</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/20（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class="key"><span class="t">午後</span><span class="dot"></span><span class="what"><span class="l-ja">石打 → 越後湯沢 → 大宮</span><span class="l-vi" lang="vi">Về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p7" hidden><div class="day"><h3><span class="l-ja">1日目 12/12（土）</span><span class="l-vi" lang="vi">Ngày 1 – 12/12</span></h3><ol class="timeline"><li class="key"><span class="t">7:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から北陸新幹線</span><span class="l-vi" lang="vi">Tàu Hokuriku Shinkansen từ Omiya</span></span></li><li class=""><span class="t">8:15頃</span><span class="dot"></span><span class="what"><span class="l-ja">軽井沢駅着 → スキー場シャトル（約5分）・滑走</span><span class="l-vi" lang="vi">Đến Karuizawa → xe 5 phút → trượt</span></span></li><li class=""><span class="t">16:30</span><span class="dot"></span><span class="what"><span class="l-ja">リフト終了 → 宿の送迎（約40分・要予約）</span><span class="l-vi" lang="vi">Xe về khách sạn (~40 phút, cần đặt)</span></span></li><li class="key"><span class="t">夜</span><span class="dot"></span><span class="what"><span class="l-ja">和洋中バイキング</span><span class="l-vi" lang="vi">Buffet tối</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/13（日）</span><span class="l-vi" lang="vi">Ngày 2 – 13/12</span></h3><ol class="timeline"><li class=""><span class="t">朝</span><span class="dot"></span><span class="what"><span class="l-ja">送迎で軽井沢駅 → スキー場（2日券の場合）</span><span class="l-vi" lang="vi">Xe ra ga → trượt (nếu vé 2 ngày)</span></span></li><li class="key"><span class="t">17:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">軽井沢駅から新幹線 → 大宮</span><span class="l-vi" lang="vi">Tàu về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div><div class="plan-block" data-plan="p8" hidden><div class="day"><h3><span class="l-ja">1日目 12/12（土）</span><span class="l-vi" lang="vi">Ngày 1</span></h3><ol class="timeline"><li class="key"><span class="t">7:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅から北陸新幹線</span><span class="l-vi" lang="vi">Tàu từ Omiya</span></span></li><li class=""><span class="t">8:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">長野駅 → 特急バス約70分 → 白馬五竜</span><span class="l-vi" lang="vi">Nagano → xe buýt 70 phút</span></span></li><li class=""><span class="t">10:00頃</span><span class="dot"></span><span class="what"><span class="l-ja">滑走</span><span class="l-vi" lang="vi">Trượt</span></span></li></ol></div><div class="day"><h3><span class="l-ja">2日目 12/13（日）</span><span class="l-vi" lang="vi">Ngày 2</span></h3><ol class="timeline"><li class=""><span class="t">15:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">白馬 → 長野駅（バス）</span><span class="l-vi" lang="vi">Xe về Nagano</span></span></li><li class="key"><span class="t">18:30頃</span><span class="dot"></span><span class="what"><span class="l-ja">大宮駅着</span><span class="l-vi" lang="vi">Về Omiya</span></span></li></ol></div><p class="muted"><span class="l-ja">時刻は目安です。新幹線の列車は乗車1か月前に決まります。</span><span class="l-vi" lang="vi">Giờ chỉ là dự kiến.</span></p></div></section>
+  <section id="cancel"><h2><span class="l-ja">キャンセル料</span><span class="l-vi" lang="vi">Phí hủy</span></h2><div class="viewing-bar"><span class="l-ja">表示中：</span><span class="l-vi" lang="vi">Đang xem: </span><b data-plan-name></b></div><div class="plan-block" data-plan="p9" hidden><div class="cancel"><h3><span class="l-ja">NASPAニューオータニ（じゃらん）</span><span class="l-vi" lang="vi">NASPA New Otani</span></h3><div class="steps"><div class="step "><span class="l-ja">〜3日前</span><span class="l-vi" lang="vi">đến 3 ngày</span><b>0%</b></div><div class="step mid"><span class="l-ja">2日前・前日</span><span class="l-vi" lang="vi">2–1 ngày</span><b>20%</b></div><div class="step hi"><span class="l-ja">当日</span><span class="l-vi" lang="vi">hôm đi</span><b>80%</b></div><div class="step hi"><span class="l-ja">不泊</span><span class="l-vi" lang="vi">không đến</span><b>100%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 12/16 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 16/12</span></p></div><div class="cancel"><h3><span class="l-ja">新幹線（えきねっと）</span><span class="l-vi" lang="vi">Tàu (Eki-net)</span></h3><p class="muted"><span class="l-ja">払い戻しの手数料は えきねっとの規定で確認（未確認）</span><span class="l-vi" lang="vi">Phí hoàn vé: xem quy định Eki-net</span></p></div></div><div class="plan-block" data-plan="p6" hidden><div class="cancel"><h3><span class="l-ja">ビッグホリデー</span><span class="l-vi" lang="vi">Big Holiday</span></h3><p class="muted"><span class="l-ja">キャンセル料は未確認（旅行条件書で確認）</span><span class="l-vi" lang="vi">Chưa xác nhận phí hủy</span></p></div></div><div class="plan-block" data-plan="p10" hidden><div class="cancel"><h3><span class="l-ja">軽井沢プリンスホテル ウエスト（楽天）</span><span class="l-vi" lang="vi">Prince Hotel West</span></h3><div class="steps"><div class="step "><span class="l-ja">〜2日前</span><span class="l-vi" lang="vi">đến 2 ngày</span><b>0%</b></div><div class="step mid"><span class="l-ja">前日</span><span class="l-vi" lang="vi">hôm trước</span><b>20%</b></div><div class="step hi"><span class="l-ja">当日</span><span class="l-vi" lang="vi">hôm đi</span><b>80%</b></div><div class="step hi"><span class="l-ja">不泊</span><span class="l-vi" lang="vi">không đến</span><b>100%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 12/10 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 10/12</span></p></div></div><div class="plan-block" data-plan="p11" hidden><div class="cancel"><h3><span class="l-ja">レンタカー</span><span class="l-vi" lang="vi">Thuê xe</span></h3><p class="muted"><span class="l-ja">キャンセル料は店舗・会社の規定で確認（未確認）</span><span class="l-vi" lang="vi">Phí hủy: xem quy định cửa hàng</span></p></div><div class="cancel"><h3><span class="l-ja">軽井沢プリンスホテル ウエスト</span><span class="l-vi" lang="vi">Prince Hotel West</span></h3><div class="steps"><div class="step "><span class="l-ja">〜2日前</span><span class="l-vi" lang="vi">đến 2 ngày</span><b>0%</b></div><div class="step mid"><span class="l-ja">前日</span><span class="l-vi" lang="vi">hôm trước</span><b>20%</b></div><div class="step hi"><span class="l-ja">当日</span><span class="l-vi" lang="vi">hôm đi</span><b>80%</b></div><div class="step hi"><span class="l-ja">不泊</span><span class="l-vi" lang="vi">không đến</span><b>100%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 12/10 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 10/12</span></p></div></div><div class="plan-block" data-plan="p3" hidden><div class="cancel"><h3><span class="l-ja">トラベルイン</span><span class="l-vi" lang="vi">Travel-inn</span></h3><div class="steps"><div class="step "><span class="l-ja">〜21日前</span><span class="l-vi" lang="vi">đến 21 ngày trước</span><b>0%</b></div><div class="step mid"><span class="l-ja">20〜8日前</span><span class="l-vi" lang="vi">20–8 ngày</span><b>20%</b></div><div class="step mid"><span class="l-ja">7〜2日前</span><span class="l-vi" lang="vi">7–2 ngày</span><b>30%</b></div><div class="step hi"><span class="l-ja">前日・当日</span><span class="l-vi" lang="vi">hôm trước / hôm đi</span><b>40〜50%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 11/28 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 28/11</span></p></div></div><div class="plan-block" data-plan="p4" hidden><div class="cancel"><h3><span class="l-ja">トラベルイン</span><span class="l-vi" lang="vi">Travel-inn</span></h3><div class="steps"><div class="step "><span class="l-ja">〜21日前</span><span class="l-vi" lang="vi">đến 21 ngày trước</span><b>0%</b></div><div class="step mid"><span class="l-ja">20〜8日前</span><span class="l-vi" lang="vi">20–8 ngày</span><b>20%</b></div><div class="step mid"><span class="l-ja">7〜2日前</span><span class="l-vi" lang="vi">7–2 ngày</span><b>30%</b></div><div class="step hi"><span class="l-ja">前日・当日</span><span class="l-vi" lang="vi">hôm trước / hôm đi</span><b>40〜50%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 11/28 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 28/11</span></p></div></div><div class="plan-block" data-plan="p2" hidden><div class="cancel"><h3><span class="l-ja">トラベルイン</span><span class="l-vi" lang="vi">Travel-inn</span></h3><div class="steps"><div class="step "><span class="l-ja">〜21日前</span><span class="l-vi" lang="vi">đến 21 ngày trước</span><b>0%</b></div><div class="step mid"><span class="l-ja">20〜8日前</span><span class="l-vi" lang="vi">20–8 ngày</span><b>20%</b></div><div class="step mid"><span class="l-ja">7〜2日前</span><span class="l-vi" lang="vi">7–2 ngày</span><b>30%</b></div><div class="step hi"><span class="l-ja">前日・当日</span><span class="l-vi" lang="vi">hôm trước / hôm đi</span><b>40〜50%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 11/28 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 28/11</span></p></div></div><div class="plan-block" data-plan="p1"><div class="cancel"><h3><span class="l-ja">トラベルイン（ツアー全体）</span><span class="l-vi" lang="vi">Travel-inn (toàn bộ tour)</span></h3><div class="steps"><div class="step "><span class="l-ja">〜21日前</span><span class="l-vi" lang="vi">đến 21 ngày trước</span><b>0%</b></div><div class="step mid"><span class="l-ja">20〜8日前</span><span class="l-vi" lang="vi">20–8 ngày</span><b>20%</b></div><div class="step mid"><span class="l-ja">7〜2日前</span><span class="l-vi" lang="vi">7–2 ngày</span><b>30%</b></div><div class="step hi"><span class="l-ja">前日・当日</span><span class="l-vi" lang="vi">hôm trước / hôm đi</span><b>40〜50%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 11/28（21日前）まで。申込は出発10日前14時まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 28/11. Hạn đăng ký: 14h, 10 ngày trước</span></p></div></div><div class="plan-block" data-plan="p5" hidden><div class="cancel"><h3><span class="l-ja">ビッグホリデー</span><span class="l-vi" lang="vi">Big Holiday</span></h3><p class="muted"><span class="l-ja">キャンセル料は公式の取得データに載っておらず未確認。予約前に旅行条件書で確認</span><span class="l-vi" lang="vi">Chưa xác nhận phí hủy – xem điều kiện trước khi đặt</span></p></div></div><div class="plan-block" data-plan="p7" hidden><div class="cancel"><h3><span class="l-ja">トラベルイン</span><span class="l-vi" lang="vi">Travel-inn</span></h3><div class="steps"><div class="step "><span class="l-ja">〜21日前</span><span class="l-vi" lang="vi">đến 21 ngày trước</span><b>0%</b></div><div class="step mid"><span class="l-ja">20〜8日前</span><span class="l-vi" lang="vi">20–8 ngày</span><b>20%</b></div><div class="step mid"><span class="l-ja">7〜2日前</span><span class="l-vi" lang="vi">7–2 ngày</span><b>30%</b></div><div class="step hi"><span class="l-ja">前日・当日</span><span class="l-vi" lang="vi">hôm trước / hôm đi</span><b>40〜50%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 11/21（21日前）まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 21/11</span></p></div></div><div class="plan-block" data-plan="p8" hidden><div class="cancel"><h3><span class="l-ja">トラベルイン</span><span class="l-vi" lang="vi">Travel-inn</span></h3><div class="steps"><div class="step "><span class="l-ja">〜21日前</span><span class="l-vi" lang="vi">đến 21 ngày trước</span><b>0%</b></div><div class="step mid"><span class="l-ja">20〜8日前</span><span class="l-vi" lang="vi">20–8 ngày</span><b>20%</b></div><div class="step mid"><span class="l-ja">7〜2日前</span><span class="l-vi" lang="vi">7–2 ngày</span><b>30%</b></div><div class="step hi"><span class="l-ja">前日・当日</span><span class="l-vi" lang="vi">hôm trước / hôm đi</span><b>40〜50%</b></div></div><p class="muted"><span class="l-ja">無料で取り消せるのは 11/21 まで</span><span class="l-vi" lang="vi">Hủy miễn phí đến 21/11</span></p></div></div></section>
+  <section id="notes"><h2><span class="l-ja">注意</span><span class="l-vi" lang="vi">Lưu ý</span></h2><div class="notes"><div class="note warn"><b><span class="l-ja">12月中旬は雪が少ないことがある</span><span class="l-vi" lang="vi">Giữa tháng 12 có thể ít tuyết</span></b><span class="l-ja">オープン直後は一部のコースだけのことがあります。出発の数日前に各スキー場の公式サイトで積雪とコースを確認してください。人工雪の軽井沢がいちばん確実です。</span><span class="l-vi" lang="vi">Ngay sau khi mở cửa có thể chỉ mở một phần. Hãy xem tình hình tuyết vài ngày trước. Karuizawa (tuyết nhân tạo) chắc chắn nhất.</span></div><div class="note warn"><b><span class="l-ja">車は雪道に注意</span><span class="l-vi" lang="vi">Lái xe: chú ý đường tuyết</span></b><span class="l-ja">関越道の湯沢周辺は12月でも大雪で通行止めになったことがあります。雪道の運転に慣れていないなら新幹線がおすすめ。車なら雪の少ない軽井沢へ。チェーン規制中はスタッドレスでもチェーンが必要です。</span><span class="l-vi" lang="vi">Cao tốc Kan-etsu gần Yuzawa từng bị đóng vì tuyết. Nếu chưa quen lái trên tuyết, nên đi tàu.</span></div><div class="note "><b><span class="l-ja">こども料金について</span><span class="l-vi" lang="vi">Về giá trẻ em</span></b><span class="l-ja">ツアーは中学生が大人料金、小学生がこども料金です。こども代金は予約画面にしか出ないため、このページの金額は5人とも大人料金で計算した「上限」です。実際はもっと安くなります。</span><span class="l-vi" lang="vi">Học sinh THCS tính giá người lớn, tiểu học tính giá trẻ em. Giá trẻ em chỉ hiện khi đặt, nên số tiền ở đây là mức tối đa.</span></div><div class="note "><b><span class="l-ja">スキースクール</span><span class="l-vi" lang="vi">Lớp học trượt tuyết</span></b><span class="l-ja">全員初心者なら、初日にスクール（2時間¥6,000〜7,500程度）がおすすめ。石打の子ども向けは12/30から、軽井沢は12/1から開講。</span><span class="l-vi" lang="vi">Người mới nên học 2 giờ ngày đầu (~6.000–7.500 yên).</span></div><div class="note "><b><span class="l-ja">手袋・ゴーグル・帽子</span><span class="l-vi" lang="vi">Găng tay, kính, mũ</span></b><span class="l-ja">多くのレンタルにはなく、あっても大人サイズのみ。子どもの分は持っていくと安心です。</span><span class="l-vi" lang="vi">Thường không cho thuê cỡ trẻ em – nên mang theo.</span></div></div></section>
+  <section id="more"><h2><span class="l-ja">詳細</span><span class="l-vi" lang="vi">Chi tiết</span></h2>
+    <div class="more">
+      <details><summary><span class="l-ja">除外した候補と理由</span><span class="l-vi" lang="vi">Các gói bị loại</span>（10）</summary><ul><li>新潟の宿の12/12・12/16泊（湯沢東映 ¥36,960など安い）：周りのスキー場がまだオープン前で滑れない</li><li>エンゼルグランディア越後中里：湯沢中里は例年12/28ごろオープンで12月中旬は滑れない</li><li>湯沢グランドホテル：12/12・12/19が満室（12/16の早割は11/16ごろが締切）</li><li>GALA湯沢：12/12〜18は滑走不可。12/19からは南エリア休止。日帰り向きで宿のプランは見つからず</li><li>舞子高原ホテル：冬のプランが未発売で料金・空きを確認できず</li><li>かぐら：上級者寄りで初心者の家族には不向き</li><li>ビッグホリデー 軽井沢プリンスウエスト：基本が食事なし（2食付きの条件に合わない）</li><li>志賀高原プリンス・白馬シェラリゾートなど：同じエリアのツアーより大幅に高い（5人で11万〜14万円）</li><li>池袋・大宮発のバス：今回の検索では見つからず</li><li>タイムズカーシェア：志木周辺でスタッドレス付き・5人乗りの車があるか確認できず（ログインが必要）</li></ul></details>
+      <details><summary><span class="l-ja">調べきれなかったこと</span><span class="l-vi" lang="vi">Chưa xác nhận được</span></summary><ul>
+        <li>ツアーの小学生のこども代金（予約画面に進まないと出ない）</li>
+        <li>ビッグホリデーのキャンセル料とリフト券の扱い（旅行条件書で確認）</li>
+        <li>志木周辺のレンタカーのスタッドレス料金・在庫、正確な高速代（NEXCOの料金検索で確認）</li>
+        <li>NASPA・石打・上越国際の今季のオープン日とリフト料金（公式サイトで確認）</li>
+        <li>一休・Yahoo!トラベル・各宿公式の料金（今回は楽天・じゃらんで比較）</li>
+      </ul></details>
+      <details><summary><span class="l-ja">出典URL</span><span class="l-vi" lang="vi">Nguồn</span></summary><ul><li><a href="https://www.princehotels.co.jp/ski/karuizawa/winter/lift/" target="_blank" rel="noopener">軽井沢プリンスホテルスキー場 リフト料金</a></li><li><a href="https://www.princehotels.co.jp/ski/karuizawa/winter/info/" target="_blank" rel="noopener">軽井沢プリンス レンタル</a></li><li><a href="https://www.princehotels.co.jp/ski/naeba/winter/lift/" target="_blank" rel="noopener">苗場スキー場 リフト料金</a></li><li><a href="https://yoyaku.travel-inn.co.jp/dom_tour_tin/tintour/JP/detail?hcd=I0&amp;tp=412&amp;c1=18&amp;c2=2821&amp;c3=046001&amp;br=5G" target="_blank" rel="noopener">トラベルイン アーバンヒル石打（新幹線）</a></li><li><a href="https://dpf.bigs.jp/tour/api/v1/tour/S59164C70701?lang=ja&amp;paxPerRoom=5&amp;goDate=20261219" target="_blank" rel="noopener">ビッグホリデー ツアーAPI（dpf.bigs.jp）</a></li><li><a href="https://www.jalan.net/yad330823/plan/" target="_blank" rel="noopener">NASPAニューオータニ（じゃらん）</a></li><li><a href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/29249" target="_blank" rel="noopener">軽井沢プリンスホテル ウエスト（楽天）</a></li><li><a href="https://jr-group.jp/toki-ryokin/" target="_blank" rel="noopener">大宮〜越後湯沢の新幹線料金</a></li><li><a href="https://shinkansen-kakuyasu.net/ohmiya-karuizawa-ryokin/" target="_blank" rel="noopener">大宮〜軽井沢の新幹線料金（参考・改定前）</a></li><li><a href="https://rent.toyota.co.jp/service/charge/pricelist.aspx?tab=H&amp;carType=4" target="_blank" rel="noopener">トヨタレンタカー 料金表</a></li><li><a href="https://www.nipponrentacar.co.jp/car_price/option/studless-tire.html" target="_blank" rel="noopener">ニッポンレンタカー スタッドレス</a></li><li><a href="https://www.mapple.net/p_article/528139/" target="_blank" rel="noopener">練馬〜碓氷軽井沢の高速料金（参考）</a></li><li><a href="https://jafmate.jp/car/traffic_topics_20260419_1198935.html" target="_blank" rel="noopener">休日割引（2026年度）</a></li><li><a href="https://bestcarweb.jp/news/car-accessory/368473?prd=2" target="_blank" rel="noopener">スタッドレスのレンタル例</a></li><li><a href="https://tabiris.com/?p=66745" target="_blank" rel="noopener">GALA湯沢 26-27シーズン</a></li><li><a href="https://www.princehotels.co.jp/press/202610_05/" target="_blank" rel="noopener">軽井沢プリンス 26-27オープン</a></li><li><a href="https://niigata-kankou.or.jp/spot/10694" target="_blank" rel="noopener">舞子スノーリゾート</a></li><li><a href="https://niigata-kankou.or.jp/spot/10688" target="_blank" rel="noopener">NASPAスキーガーデン（25-26）</a></li></ul></details>
+      <p class="muted"><span class="l-ja">調査量（合計）：約60サイト・検索とページ取得など約200回</span><span class="l-vi" lang="vi">Khối lượng khảo sát: ~60 trang web, ~200 lượt tìm kiếm</span></p>
+    </div>
+  </section>
+  <footer><span class="l-ja">料金は2026/11/13時点のものです。予約前に各サイトで確認してください。</span><span class="l-vi" lang="vi">Giá tại thời điểm 13/11/2026. Vui lòng kiểm tra lại trước khi đặt.</span></footer>
+</div>
+<script>
+(function () {
+  var $ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var state = { mode: "all", area: "all", plan: null };
+  var firstVerdict = document.querySelector('.verdict[data-mode="all"]');
+  state.plan = firstVerdict ? firstVerdict.dataset.plan : null;
+
+  function planName(id) {
+    var card = document.querySelector('.card[data-plan="' + id + '"] h3 .l-' + (document.documentElement.dataset.lang || "ja"));
+    var bar = document.querySelector('.bar[data-plan="' + id + '"] .name');
+    return card ? card.textContent : (bar ? bar.textContent : "");
+  }
+  function inMode(el) { return (state.mode === "all" || el.dataset.mode === state.mode) && (state.area === "all" || el.dataset.area === state.area); }
+
+  function render() {
+    $(".mode").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode)); });
+    $(".verdict").forEach(function (v) { v.hidden = v.dataset.mode !== state.mode; });
+
+    var cards = $(".card");
+    var shown = 0;
+    cards.forEach(function (c) { c.hidden = !inMode(c); if (!c.hidden) shown++; });
+    var count = document.getElementById("compare-count");
+    if (count) count.textContent = (document.documentElement.dataset.lang === "vi" ? shown + " gói" : "★順・" + shown + "件");
+
+    var bars = $(".bar").filter(function (b) { b.hidden = !inMode(b); return !b.hidden; });
+    var max = Math.max.apply(null, bars.map(function (b) { return Number(b.dataset.value) || 0; }).concat([1]));
+    bars.forEach(function (b) {
+      var fill = b.querySelector(".fill");
+      if (fill) fill.style.width = Math.round((Number(b.dataset.value) || 0) / max * 100) + "%";
+    });
+
+    $(".bar").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.plan === state.plan)); });
+    cards.forEach(function (c) {
+      var on = c.dataset.plan === state.plan;
+      c.classList.toggle("selected", on);
+      var tag = c.querySelector(".badge.viewing");
+      if (tag) tag.hidden = !on;
+    });
+    $(".plan-block").forEach(function (p) { p.hidden = p.dataset.plan !== state.plan; });
+    $("[data-plan-name]").forEach(function (n) { n.textContent = planName(state.plan); });
+
+    var carSection = document.querySelector("[data-car-section]");
+    if (carSection) {
+      var hasCar = !!carSection.querySelector('.plan-block[data-plan="' + state.plan + '"]');
+      carSection.hidden = !hasCar;
+      $('[data-toc="car"]').forEach(function (a) { a.hidden = !hasCar; });
+    }
+  }
+
+  function setMode(mode) {
+    state.mode = mode;
+    var v = document.querySelector('.verdict[data-mode="' + mode + '"]');
+    if (v && v.dataset.plan) state.plan = v.dataset.plan;
+    render();
+  }
+  function showPlan(id, scroll) {
+    state.plan = id;
+    render();
+    if (scroll) {
+      var target = document.getElementById("schedule");
+      if (target) target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  $(".mode").forEach(function (b) { b.addEventListener("click", function () { setMode(b.dataset.mode); }); });
+  $(".area").forEach(function (b) { b.addEventListener("click", function () { state.area = b.dataset.area; $(".area").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); render(); }); });
+  function setLang(l) { document.documentElement.dataset.lang = l; document.documentElement.lang = l; $(".langs button").forEach(function (x) { x.setAttribute("aria-pressed", String(x.dataset.lang === l)); }); try { localStorage.setItem("lang", l); } catch (e) {} render(); }
+  $(".langs button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+  try { var saved = localStorage.getItem("lang"); if (saved === "vi" || saved === "ja") { document.documentElement.dataset.lang = saved; document.documentElement.lang = saved; $(".langs button").forEach(function (x) { x.setAttribute("aria-pressed", String(x.dataset.lang === saved)); }); } } catch (e) {}
+  $(".bar").forEach(function (b) { b.addEventListener("click", function () {
+    showPlan(b.dataset.plan, false);
+    var card = document.getElementById("card-" + b.dataset.plan);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }); });
+  $("[data-show]").forEach(function (b) { b.addEventListener("click", function () { showPlan(b.dataset.show, true); }); });
+
+  render();
+})();
+</script>
+
+</body>
+</html>

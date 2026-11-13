@@ -31,11 +31,12 @@ def parse(t):
     sec = re.search(r"スキー場メニュー(.{0,1500}?)ステイメニュー", t)
     r["school"] = None
     if sec:
-        m = re.search(r"(スキースクール|スクール)(.{0,220})", sec.group(1))
+        m = re.search(r"(スキースクール|スクール)(.*)", sec.group(1))
         if m and "￥" in m.group(2):
             txt = m.group(1) + m.group(2)
-            txt = re.split(r"スクール対応先|※こども|2\.|予約へ進む", txt)[0]
-            r["school"] = txt.strip()[:200]
+            txt = re.split(r"スクール対応先|開講時間|受付場所|※こども|\s2\.|予約へ進む", txt)[0]
+            mm = re.match(r"^(.*(?:現地払い|事前決済|払い|。|ください|ます))", txt.strip(), re.S)
+            r["school"] = (mm.group(1) if mm else txt).strip()
     # レンタル：スキーセットとウェア（1日あたり。2日間の設定があればそちら）
     rent = re.search(r"レンタルメニュー クラス(.{0,4000}?)(ゴーグル・|ステイメニュー|旅行条件|行程表)", t)
     rt = rent.group(1) if rent else ""
@@ -58,7 +59,7 @@ def parse(t):
         p = re.split(r"\(2\)", p)[0]
         loc += sum(num(x) for x in re.findall(r"各自負担￥([\d,]+)", p))
     r["local"] = loc
-    r["itin"] = it[:900]
+    r["itin"] = it
     g = re.search(r"(ゲレンデ|スキー場)まで：?([^ ]{1,30})", t)
     r["toslope"] = g.group(2) if g else None
     m = re.search(r"夕食：「([^」]{1,40})」", t); r["dinner"] = m.group(1) if m else None

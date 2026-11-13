@@ -31,7 +31,7 @@ def steps(text):
             continue
         # 宿・フリータイム・注意書きを分ける
         hm = re.search(r"【宿泊】", p)
-        notes = re.findall(r"※[^※]{2,80}", p)
+        notes = [n.strip() for n in re.findall(r"※[^※]{2,}", p)]
         main = re.split(r"※", p)[0].strip()
         main = re.sub(r"【宿泊】.*$", "", main).strip()
         tm = re.search(r"(\d{1,2})[：:](\d{2})", main)
@@ -44,12 +44,12 @@ def steps(text):
         if main in ("宿泊施設",): main = ""
         if main:
             kind = "free" if "フリータイム" in main and len(main) < 40 else "stop"
-            out.append(["stop", kind, main[:90], time])
+            out.append(["stop", kind, main, time])
         if free: out.append(["stop", "free", "到着後は自由行動（すぐ滑れる）", ""])
         if hm: out.append(["stop", "hotel", "HOTEL", ""])
         for n in notes[:1]:
             if "下記" in n or "リンク" in n: continue
-            out.append(["note", "", n[:90]])
+            out.append(["note", "", n])
     return out
 
 def parse(itin, mode):

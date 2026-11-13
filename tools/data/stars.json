@@ -1,0 +1,452 @@
+{
+ "ANAホリデイ・インリゾート信濃大町くろよ": {
+  "id": "6221",
+  "score": 4.39,
+  "count": 786,
+  "onsen": true
+ },
+ "Hotel Fairy House(シュプールイン苗場別館": null,
+ "SBCリゾート木島平": null,
+ "ぴーぷるロッジ": null,
+ "ほりでーいんこばやし": {
+  "id": "17635",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "よませライジングサンホテル明幸": null,
+ "アーバンヒル石打": {
+  "id": "164611",
+  "score": 3.14,
+  "count": 17,
+  "onsen": null
+ },
+ "エンゼルグランディア越後中里": {
+  "id": "5487",
+  "score": 4.31,
+  "count": 5120,
+  "onsen": true
+ },
+ "グランジャム栂池": {
+  "id": "172143",
+  "score": 3.94,
+  "count": 45,
+  "onsen": true
+ },
+ "グランドールタカノ": {
+  "id": "68618",
+  "score": null,
+  "count": null,
+  "onsen": true
+ },
+ "コンドミニアムエクセ白馬": {
+  "id": "39916",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "コンドミニアム五竜": null,
+ "シャトーテル北志賀": null,
+ "シャレー野沢": {
+  "id": "181116",
+  "score": 4.5,
+  "count": 16,
+  "onsen": null
+ },
+ "シュプールイン苗場": null,
+ "シュライン新宅": {
+  "id": "2570",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "ジュニアミント": null,
+ "スカイランド": null,
+ "スポーツプラザ上越": null,
+ "セジュールミント": {
+  "id": "3068",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "ダボスホテルVersoix(ヴェルソア)": null,
+ "ナイス信濃荘": null,
+ "バートンホテル": {
+  "id": "2829",
+  "score": 3.95,
+  "count": 153,
+  "onsen": null
+ },
+ "プチハウスひろみ": {
+  "id": "70292",
+  "score": 3.33,
+  "count": 19,
+  "onsen": null
+ },
+ "プレジデントホテル別館": null,
+ "ベルグかどや": null,
+ "ペンションオズ": {
+  "id": "18831",
+  "score": 4.6,
+  "count": 101,
+  "onsen": null
+ },
+ "ホッサムイン北志賀": null,
+ "ホテル　アルペンブリック": {
+  "id": "5121",
+  "score": 4.01,
+  "count": 727,
+  "onsen": true
+ },
+ "ホテルこだま": {
+  "id": "20698",
+  "score": 3.67,
+  "count": 52,
+  "onsen": null
+ },
+ "ホテルゆのたに荘": {
+  "id": "43942",
+  "score": 2.92,
+  "count": 112,
+  "onsen": true
+ },
+ "ホテルアルパイン": {
+  "id": "30044",
+  "score": 3.8,
+  "count": 11,
+  "onsen": null
+ },
+ "ホテルエルディア": {
+  "id": "39696",
+  "score": 3.8,
+  "count": 22,
+  "onsen": null
+ },
+ "ホテルオークフォレスト": {
+  "id": "145020",
+  "score": 3.85,
+  "count": 45,
+  "onsen": true
+ },
+ "ホテルグリーンプラザ上越": {
+  "id": "5410",
+  "score": 3.7,
+  "count": 1851,
+  "onsen": true
+ },
+ "ホテルグリーンプラザ白馬": {
+  "id": "11010",
+  "score": 4.25,
+  "count": 1843,
+  "onsen": true
+ },
+ "ホテルサンプラザ栂池": null,
+ "ホテルシャレー竜王": {
+  "id": "2156",
+  "score": 4.25,
+  "count": 16,
+  "onsen": null
+ },
+ "ホテルシルクイン斑尾": {
+  "id": "29371",
+  "score": 3.87,
+  "count": 261,
+  "onsen": true
+ },
+ "ホテルゾンタック": null,
+ "ホテルタガワ": {
+  "id": "168753",
+  "score": 4.0,
+  "count": 22,
+  "onsen": null
+ },
+ "ホテルタングラム": {
+  "id": "1614",
+  "score": 4.18,
+  "count": 1939,
+  "onsen": false
+ },
+ "ホテルニューダボス": {
+  "id": "8435",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "ホテルノース志賀": {
+  "id": "40285",
+  "score": 3.91,
+  "count": 171,
+  "onsen": null
+ },
+ "ホテルプレステージ": null,
+ "ホテルマダムミレー": {
+  "id": "108168",
+  "score": 4.0,
+  "count": 19,
+  "onsen": null
+ },
+ "ホテルマッキンレー": {
+  "id": "6082",
+  "score": 4.0,
+  "count": 7,
+  "onsen": null
+ },
+ "ホテルメリベル栂池": {
+  "id": "17826",
+  "score": 3.5,
+  "count": 13,
+  "onsen": null
+ },
+ "ホテルモンブラン白馬": {
+  "id": "52008",
+  "score": 3.5,
+  "count": 15,
+  "onsen": null
+ },
+ "ホテルユールニッセ": null,
+ "ホテルレシェント": {
+  "id": "56265",
+  "score": 4.0,
+  "count": 27,
+  "onsen": null
+ },
+ "ホテルヴィラチェリオ": null,
+ "ホテル城山館": null,
+ "ホテル竜王": null,
+ "ホテル竜王ヴィレッヂ": {
+  "id": "177745",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "ホテル金栄": {
+  "id": "19164",
+  "score": 4.0,
+  "count": 10,
+  "onsen": null
+ },
+ "リゾートイン　マリオンシナノ": {
+  "id": "3059",
+  "score": 3.96,
+  "count": 63,
+  "onsen": true
+ },
+ "リゾートイン菅平スイスホテル": {
+  "id": "2300",
+  "score": 4.25,
+  "count": 51,
+  "onsen": null
+ },
+ "リゾートハイランド美やざき": null,
+ "リゾートハウス飯士館": null,
+ "レインストンホテル": {
+  "id": "20016",
+  "score": 4.0,
+  "count": 25,
+  "onsen": null
+ },
+ "ロッジタカユキアネックス": null,
+ "ロッジ杉の原": {
+  "id": "38610",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "ロッヂKOMATSU": null,
+ "ロッヂめぐみ": null,
+ "ロッヂベアーズ": {
+  "id": "51213",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "ロッヂ一代": null,
+ "ロッヂ福本": null,
+ "ロマコティー・キーピス": null,
+ "一茶のこみち　美湯の宿": {
+  "id": "2441",
+  "score": 4.22,
+  "count": 472,
+  "onsen": true
+ },
+ "三国屋": null,
+ "上越国際スーパープライス協定": null,
+ "丸喜屋旅館": {
+  "id": "109530",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "五倫荘（ごりんそう）": null,
+ "御宿 本陣": {
+  "id": "3040",
+  "score": 4.17,
+  "count": 723,
+  "onsen": true
+ },
+ "御宿本陣　別館苗場ＷＥＳＴ": null,
+ "志賀ハイランドホテル": null,
+ "志賀パレスホテル": {
+  "id": "30822",
+  "score": 3.43,
+  "count": 282,
+  "onsen": true
+ },
+ "志賀パークホテル": {
+  "id": "5757",
+  "score": 3.56,
+  "count": 210,
+  "onsen": true
+ },
+ "志賀高原プリンスホテル": {
+  "id": "30695",
+  "score": 4.04,
+  "count": 530,
+  "onsen": null
+ },
+ "志賀高原プリンスホテル西館": null,
+ "戸狩温泉スーパープライスロッジ協定": null,
+ "手打ちそばの宿 石田屋": {
+  "id": "3020",
+  "score": 4.35,
+  "count": 214,
+  "onsen": true
+ },
+ "斑尾高原ホテル": {
+  "id": "2816",
+  "score": 4.16,
+  "count": 451,
+  "onsen": false
+ },
+ "旅館　叶家": {
+  "id": "39905",
+  "score": 3.69,
+  "count": 445,
+  "onsen": true
+ },
+ "旬彩の庄 坂戸城": {
+  "id": "1567",
+  "score": 3.96,
+  "count": 444,
+  "onsen": true
+ },
+ "湯沢パークホテル": {
+  "id": "20091",
+  "score": 4.26,
+  "count": 283,
+  "onsen": true
+ },
+ "白馬サンバレーホテル": {
+  "id": "172301",
+  "score": 3.38,
+  "count": 26,
+  "onsen": null
+ },
+ "白馬パークホテル": {
+  "id": "165761",
+  "score": 3.92,
+  "count": 18,
+  "onsen": null
+ },
+ "白馬東急ホテル": {
+  "id": "1173",
+  "score": 4.59,
+  "count": 483,
+  "onsen": true
+ },
+ "石打スキーセンター": {
+  "id": "41772",
+  "score": 4.5,
+  "count": 42,
+  "onsen": null
+ },
+ "石打丸山スーパープライス協定": null,
+ "立山プリンスホテル": {
+  "id": "2786",
+  "score": 4.06,
+  "count": 1075,
+  "onsen": true
+ },
+ "竜王スーパープライス協定": null,
+ "竜王ドラゴンヒット協定": null,
+ "竜王パークホテル": {
+  "id": "151131",
+  "score": 4.0,
+  "count": 20,
+  "onsen": null
+ },
+ "竜王マウンテンホテル": {
+  "id": "183171",
+  "score": 3.0,
+  "count": 18,
+  "onsen": null
+ },
+ "緑翠亭　景水": {
+  "id": "3116",
+  "score": 4.19,
+  "count": 1104,
+  "onsen": true
+ },
+ "美雪荘": null,
+ "舞子スーパープライス協定": null,
+ "舞子高原ホテル": {
+  "id": "16403",
+  "score": 4.39,
+  "count": 1557,
+  "onsen": true
+ },
+ "苗場プリンスホテル": {
+  "id": "30694",
+  "score": 3.65,
+  "count": 1394,
+  "onsen": true
+ },
+ "菅平イナリールホテル": {
+  "id": "104511",
+  "score": 3.86,
+  "count": 7,
+  "onsen": null
+ },
+ "菅平サンホテル": {
+  "id": "44164",
+  "score": 2.0,
+  "count": 46,
+  "onsen": true
+ },
+ "菅平ホテル": {
+  "id": "31892",
+  "score": 4.2,
+  "count": 67,
+  "onsen": null
+ },
+ "菅平国際ホテルベルニナ": null,
+ "菅平高原ホテル柄澤": {
+  "id": "16104",
+  "score": null,
+  "count": null,
+  "onsen": null
+ },
+ "菅平高原協定＜スーパープライス＞": null,
+ "護城館": null,
+ "車山スカイパークホテル": null,
+ "鹿島槍アルペンイン": null,
+ "黒部サンバレーホテル": {
+  "id": "176543",
+  "score": 3.98,
+  "count": 293,
+  "onsen": true
+ },
+ "黒部ビューホテル": {
+  "id": "5130",
+  "score": 4.18,
+  "count": 505,
+  "onsen": true
+ },
+ "黒部観光ホテル": {
+  "id": "2216",
+  "score": 4.15,
+  "count": 938,
+  "onsen": true
+ },
+ "ﾎﾃﾙ幸福の森 けやきの樹": null
+}

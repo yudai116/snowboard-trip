@@ -1,0 +1,39 @@
+
+/* ---- 全ツアー版の追加 ---- */
+.areas.four { grid-template-columns: repeat(3, 1fr); }
+.fstar { border: 0; background: transparent; color: var(--night-ink); min-height: 40px; border-radius: 9px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.fstar[aria-pressed="true"] { background: var(--surface); color: var(--ink); }
+.mode small { font-family: var(--font-num); }
+#dayBest { display: flex; flex-direction: column; gap: 10px; }
+#dayBest h3 { font-size: 20px; font-weight: 900; }
+#dayBest .label { display: inline-flex; background: var(--accent); color: var(--accent-ink); font-weight: 900; font-size: 13px; padding: 3px 10px; border-radius: 999px; width: fit-content; }
+.daymin { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.dcell { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 10px; padding: 6px 4px; display: flex; flex-direction: column; align-items: center; gap: 0; cursor: pointer; min-height: 64px; }
+.dcell span { font-size: 13px; font-weight: 700; }
+.dcell span small { margin-left: 2px; color: var(--ink-2); font-weight: 400; }
+.dcell.we span small { color: var(--accent); }
+.dcell b { font-size: 17px; }
+.dcell > small { font-size: 11px; color: var(--ink-2); }
+.dcell.sel { border-color: var(--accent); background: var(--accent-soft); }
+.sortrow { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.sortb { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; min-height: 36px; padding: 0 14px; font-weight: 700; cursor: pointer; }
+.sortb[aria-pressed="true"] { background: var(--night); color: var(--night-ink); border-color: var(--night); }
+.sub-h { font-size: 15px; }
+.bar .name small { color: var(--ink-2); font-weight: 400; font-size: 12px; }
+.sub { font-size: 13px; color: var(--ink-2); margin: 0; }
+.facts2 { display: flex; flex-wrap: wrap; gap: 4px; }
+.facts2 span { font-size: 12px; background: var(--good-soft); color: var(--good); border-radius: 6px; padding: 2px 8px; font-weight: 700; }
+.muted.small { font-size: 12px; }
+.btn.more { background: var(--surface); color: var(--ink); border: 1px solid var(--line); justify-content: center; }
+#alltable td, #alltable th { font-size: 13px; }
+#alltable td:nth-child(3) { min-width: 200px; white-space: normal; font-family: var(--font-body); text-align: left; }
+#alltable td:nth-child(3) small { display: block; color: var(--ink-2); font-size: 11px; }
+#alltable td:nth-child(4) { font-family: var(--font-body); white-space: normal; text-align: left; }
+#alltable td:first-child, #alltable th:first-child { min-width: 0; position: static; }
+#alltable tr { cursor: pointer; }
+#alltable tr.na td { color: var(--ink-2); }
+#alltable tr.sel td { background: var(--ice-soft); }
+#alltable .r { text-align: right; }
+#sched .day p { margin: 0; font-size: 14px; line-height: 1.8; }
+html.view-pc .daymin { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+html.view-pc #alltable { max-width: none; }

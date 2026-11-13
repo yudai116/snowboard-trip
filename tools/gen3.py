@@ -4,7 +4,7 @@ import html, os, sys, json
 S = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1]
 sys.path.insert(0, S)
-import daily
+import daily, itin
 _src = open(os.path.join(S, "gen.py"), encoding="utf-8").read()
 _g = {"__file__": os.path.join(S, "gen.py")}
 _argv = sys.argv; sys.argv = ["gen.py", "/dev/null"]
@@ -45,9 +45,29 @@ for p in plans:
     q["tags"] = tags
     if p["src"] == "tin":
         used = {d["v"] for d in p["days"].values() if "v" in d}
-        q["variants"] = {vid: {k: v[k] for k in ("om", "l2", "l2c", "rent", "local", "mode", "school", "url", "name", "itin")} for vid, v in p["variants"].items() if vid in used}
+        q["variants"] = {}
+        for vid, v in p["variants"].items():
+            if vid not in used: continue
+            vv = {k: v[k] for k in ("om", "l2", "l2c", "rent", "local", "mode", "school", "url", "name")}
+            vv["steps"] = itin.parse(v["itin"], v["mode"]); q["variants"][vid] = vv
+        main = p["days"].get("1219", {}).get("v") or sorted(used)[0]
+        mv = p["variants"][main]
+        q["slope"], q["slopel"] = itin.slope_min(p["sub"], p["icon"], mv["toslope"])
+        q["legs"] = q["variants"][main]["steps"]["legs"]
     else:
-        q.update(EXTRA_INFO.get(p["id"], {})); q["url"] = p["url"]
+        e = EXTRA_INFO.get(p["id"], {}); q.update(e); q["url"] = p["url"]
+        q["steps"] = itin.parse(e.get("itin", ("", ""))[0], p["mode"])
+        q["slope"], q["slopel"] = {"p5": (1, "徒歩1分"), "p6": (0, "徒歩0分"), "p9": (25, "無料シャトル約15分"), "p10": (5, "徒歩圏"), "p11": (5, "徒歩圏")}.get(p["id"], (60, ""))
+        q["legs"] = q["steps"]["legs"]
+    rev = p.get("rev") or {}
+    onsen = ("温泉付" in (p.get("icon") or "")) or bool(rev.get("onsen"))
+    sc = rev.get("score")
+    q["score"] = sc
+    q["onsen"] = onsen
+    sl = q["slope"]
+    comfort = (sc or 3.0) + (0.5 if onsen else 0) + (0.5 if sl <= 2 else 0.3 if sl <= 5 else 0.1 if sl <= 15 else 0) \
+        + (0.3 if p["mode"] == "train" else 0) - 0.15 * max(q["legs"] - 1, 0) + (0.2 if "全室禁煙" in (p.get("icon") or "") else 0)
+    q["comfort"] = round(comfort, 2)
     out.append(q)
 
 days = {daily.key(d): {"label": daily.lab(d)} for d in daily.DAYS}
@@ -68,6 +88,41 @@ for d in daily.DAYS:
 dropped = sorted(DATA["dropped"], key=lambda x: x[3] or 0)
 MODEJA = {"train": "新幹線", "bus": "バス", "car": "車"}
 drop_html = "".join(f"<li>{html.escape(h)}（{html.escape(r)}・{MODEJA[m]}）：最安 ¥{v:,}/人。どの日もその日の最安の1.5倍を超える</li>" if v else f"<li>{html.escape(h)}：料金なし</li>" for h, r, m, v in dropped)
+
+
+def _stat(keys, f=lambda p: True):
+    av = [(p["days"][k]["pp"], p) for k in keys for p in plans if f(p) and "pp" in p["days"][k] and not p["days"][k]["w"]]
+    cnt = max(sum(1 for p in plans if f(p) and "pp" in p["days"][k] and not p["days"][k]["w"]) for k in keys)
+    return (min(av, key=lambda x: x[0]) if av else None), cnt
+_A = [f"12{d}" for d in range(12, 19)]; _B = [f"12{d}" for d in range(19, 26)]; _C = ["1226", "1227"]
+a_all, a_n = _stat(_A); a_tr, _ = _stat(_A, lambda p: p["mode"] == "train")
+b_all, b_n = _stat(_B); b_ni, _ = _stat(_B, lambda p: p["area"] == "niigata"); b_tr, _ = _stat(_B, lambda p: p["mode"] == "train"); b_bus, _ = _stat(_B, lambda p: p["mode"] == "bus")
+b_3, b_3n = _stat(_B, lambda p: p["star"] == 3)
+c_all, c_n = _stat(_C); c_ni, _ = _stat(_C, lambda p: p["area"] == "niigata")
+def Y(x): return f"¥{x[0]:,}"
+def H(x): return f"{x[1]['hotel'].replace(chr(12288), ' ')}・{x[1]['resort'].replace('エイブル', '').replace('&HAKUBA47', '')}"
+INSIGHT = [
+  (f"前半（12/12〜18）は長野しか空いていない", f"Nửa đầu (12–18/12) chỉ có Nagano",
+   f"新潟のスキー場はほとんどが12/19ごろからオープン。確実に滑れるのは白馬五竜・志賀高原・軽井沢などの約{a_n}件だけで、最安は1人{Y(a_all)}（{H(a_all)}・バス）。新幹線だと{Y(a_tr)}〜と高め。",
+   f"Niigata mở cửa khoảng 19/12. Chỉ ~{a_n} gói ở Nagano; rẻ nhất {Y(a_all)}/người (xe buýt), tàu từ {Y(a_tr)}."),
+  (f"いちばん選びやすいのは 12/19〜25 出発", f"Dễ chọn nhất: đi 19–25/12",
+   f"新潟も開いて{b_n}件から選べ、値段も最安。全体の最安は1人{Y(b_all)}（{H(b_all)}）、新潟なら{Y(b_ni)}〜。平日にしても土日とほぼ同じ値段で、安くならない。",
+   f"{b_n} gói, rẻ nhất {Y(b_all)}/người; Niigata từ {Y(b_ni)}. Ngày thường không rẻ hơn."),
+  (f"12/26〜27 は年末料金・満室も", f"26–27/12: giá cuối năm, nhiều nơi hết phòng",
+   f"最安は{Y(c_all)}であまり上がらないが、新潟は{Y(c_ni)}〜と1人数千円高くなり、人気の宿は満室が出始めている。",
+   f"Rẻ nhất {Y(c_all)}; Niigata từ {Y(c_ni)}, nhiều khách sạn hết phòng."),
+  (f"バスと新幹線の差は1人 約¥{(b_tr[0]-b_bus[0]):,}", f"Xe buýt rẻ hơn tàu ~¥{(b_tr[0]-b_bus[0]):,}/người",
+   f"バスは新宿7時ごろ発（志木を6時前に出発）・帰りは20〜21時着。子ども連れなら、大宮から乗れる新幹線がラク（12/19〜25の新幹線の最安は{Y(b_tr)}）。",
+   f"Xe buýt đi 7 giờ sáng từ Shinjuku. Với trẻ em, tàu từ Omiya dễ hơn (từ {Y(b_tr)})."),
+  (f"宿の質で選ぶなら ★★★（{b_3n}件）から", f"Muốn khách sạn tốt: chọn ★★★ ({b_3n} gói)",
+   f"天然温泉つきで口コミ3.5以上・100件以上の宿。12/19〜25なら1人{Y(b_3)}〜（{H(b_3)}）。上の「宿の★」で絞り込めます。",
+   f"Từ {Y(b_3)}/người. Lọc bằng nút ★ ở trên."),
+  (f"金額は高めに出しています", f"Giá ghi ở đây là mức tối đa",
+   f"ツアーの小学生も大人料金で数えているので、実際は1人あたり数千円安くなります。車（レンタカー・タイヤレンタル）は高くつき、雪道にも不慣れなので候補から外しました。",
+   f"Trẻ em tính như người lớn nên thực tế rẻ hơn. Đi ô tô đắt và đường tuyết khó nên đã loại."),
+]
+insight_html = '<section id="insight" class="insight"><h2>' + T("ざっくり所感", "Tóm tắt nhanh") + '</h2><ol>' + "".join(
+    f'<li><b>{T(a, b)}</b><span>{T(c, d)}</span></li>' for a, b, c, d in INSIGHT) + '</ol></section>'
 
 STARBOX = f'''<div class="starbox">
   <h3>{T("★の意味（宿の確かさ）", "Ý nghĩa của ★")}</h3>
@@ -114,17 +169,25 @@ body = f'''
     </div>
     <svg class="ridge" viewBox="0 0 400 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44 L0 30 L40 18 L70 26 L120 6 L160 22 L200 12 L250 28 L300 4 L340 20 L370 14 L400 24 L400 44 Z"/></svg>
   </header>
+  {insight_html}
   <div class="toprow">
     <section class="verdict" id="best"><div id="dayBest"></div>
       <p class="muted">{T("並び順は「★の多い順 → 安い順」。料金が全部分かり、注意がないものが上に来ます。", "Sắp xếp: nhiều ★ trước, rồi rẻ hơn.")}</p></section>
     <section id="goals"><h2>{T("日ごとの最安（1人あたり・全部込み）", "Giá rẻ nhất mỗi ngày")}</h2><div class="daymin">{dm}</div>
       <p class="muted">{T("12/18以前は新潟の多くがオープン前で、確実なのは軽井沢・志賀高原・白馬五竜など。12/19〜25が安く、12/26からは年末料金。平日にしても安くならない日が多い。", "Trước 18/12 nhiều nơi chưa mở. 19–25/12 rẻ; từ 26/12 giá cuối năm.")}</p>{STARBOX}</section>
   </div>
-  <nav class="toc" aria-label="目次"><a href="#best">{T("結論", "Kết luận")}</a><a href="#compare">{T("候補", "Các gói")}</a><a href="#all">{T("全件の一覧", "Danh sách")}</a><a href="#school">{T("スクール", "Trường")}</a><a href="#schedule">{T("日程", "Lịch trình")}</a><a href="#cancel">{T("キャンセル料", "Phí hủy")}</a><a href="#notes">{T("注意", "Lưu ý")}</a><a href="#more">{T("詳細", "Chi tiết")}</a></nav>
+  <nav class="toc" aria-label="目次"><a href="#insight">{T("所感", "Tóm tắt")}</a><a href="#best">{T("結論", "Kết luận")}</a><a href="#compare">{T("候補", "Các gói")}</a><a href="#all">{T("全件の一覧", "Danh sách")}</a><a href="#school">{T("スクール", "Trường")}</a><a href="#schedule">{T("日程", "Lịch trình")}</a><a href="#cancel">{T("キャンセル料", "Phí hủy")}</a><a href="#notes">{T("注意", "Lưu ý")}</a><a href="#more">{T("詳細", "Chi tiết")}</a></nav>
   <section id="compare">
     <h2>{T("候補を比べる", "So sánh")} <small><span data-seldate></span> {T("出発", "khởi hành")}・<span id="compare-count"></span></small></h2>
     <p class="muted">{T("金額は「志木からの電車＋新幹線・バス・車＋宿2食＋リフト2日＋レンタル2日＋現地の交通」を5人で割った1人あたり。ツアーの小学生は大人料金で数えた上限（実際はもっと安い）。※は一部の料金が分からず合計に入っていないもの。", "Giá mỗi người đã gồm tất cả; trẻ em tính như NL (tối đa). ※ = thiếu một phần.")}</p>
-    <div class="sortrow"><span class="muted">{T("並び順：", "Sắp xếp:")}</span><button class="sortb" type="button" data-sort="rank" aria-pressed="true">{T("★→安い順", "★ → giá")}</button><button class="sortb" type="button" data-sort="price" aria-pressed="false">{T("安い順", "Giá")}</button></div>
+    <div class="sortrow"><span class="muted">{T("並び順：", "Sắp xếp:")}</span><button class="sortb" type="button" data-sort="rank" aria-pressed="true">{T("おすすめ（★→安い）", "Đề xuất")}</button><button class="sortb" type="button" data-sort="price" aria-pressed="false">{T("安い順", "Rẻ nhất")}</button><button class="sortb" type="button" data-sort="comfort" aria-pressed="false">{T("快適さ順", "Thoải mái")}</button><button class="sortb" type="button" data-sort="rating" aria-pressed="false">{T("口コミ評価順", "Đánh giá")}</button><button class="sortb" type="button" data-sort="slope" aria-pressed="false">{T("ゲレンデが近い順", "Gần dốc")}</button><button class="sortb" type="button" data-sort="legs" aria-pressed="false">{T("乗り換えが少ない順", "Ít chuyển xe")}</button>
+    <details class="sorthelp"><summary>{T("並び順の決め方", "Cách sắp xếp")}</summary><ul>
+      <li>{T("おすすめ：★の多い順、同じ★なら安い順", "★ nhiều trước, rồi rẻ")}</li>
+      <li>{T("快適さ：楽天の口コミ点（無ければ3.0）に、天然温泉＋0.5、ゲレンデ徒歩2分以内＋0.5（5分以内＋0.3・15分以内＋0.1）、新幹線＋0.3、全室禁煙＋0.2、乗り換え1回ごとに−0.15 を足した点数", "Điểm đánh giá + suối nóng + gần dốc + tàu + cấm hút thuốc − chuyển xe")}</li>
+      <li>{T("口コミ評価：楽天トラベルの総合点（口コミが無い宿は最後）", "Điểm Rakuten")}</li>
+      <li>{T("ゲレンデが近い：宿からゲレンデまでの徒歩の分数。シャトル・送迎は分数＋10分として比べる", "Phút đi bộ; xe đưa đón +10")}</li>
+      <li>{T("乗り換え：大宮・新宿から宿までに乗る乗り物の数（バスツアーは1回）", "Số lần đổi xe từ Omiya/Shinjuku")}</li>
+      <li>{T("どの並び順でも、料金が全部分かるものが先、※付き・販売なしは後ろ", "Gói đủ giá đứng trước")}</li></ul></details></div>
     <h3 class="sub-h">{T("安い順の上位10件", "10 gói đầu")}</h3>
     <div class="bars"></div>
     <div class="cards"></div>

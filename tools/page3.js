@@ -26,7 +26,12 @@
     arr.sort(function (a, b) {
       var oa = ok(a) ? (clean(a) ? 0 : 1) : 2, ob = ok(b) ? (clean(b) ? 0 : 1) : 2;
       if (oa !== ob) return oa - ob;
-      if (st.sort === "price") return (ok(a) ? day(a).pp : 1e9) - (ok(b) ? day(b).pp : 1e9);
+      var pa = ok(a) ? day(a).pp : 1e9, pb = ok(b) ? day(b).pp : 1e9;
+      if (st.sort === "price") return pa - pb;
+      if (st.sort === "comfort") return (b.comfort - a.comfort) || (pa - pb);
+      if (st.sort === "rating") return ((b.score || 0) - (a.score || 0)) || (pa - pb);
+      if (st.sort === "slope") return (a.slope - b.slope) || (pa - pb);
+      if (st.sort === "legs") return (a.legs - b.legs) || (pa - pb);
       if (a.star !== b.star) return b.star - a.star;
       return (ok(a) ? day(a).pp : 1e9) - (ok(b) ? day(b).pp : 1e9);
     });
@@ -74,6 +79,7 @@
     h += '<div class="price-row"><div class="price-big num"><span class="yen">¥</span>' + d.pp.toLocaleString("ja-JP") + '</div><div class="price-unit">' + L("1人あたり・全部込み", "mỗi người, đã gồm tất cả") + "<br>" + L("5人 ", "5 người ") + '<b class="num">' + yen(d.tot) + "</b>・" + esc(dlab(st.date)) + L(" 出発", "") + "</div></div>";
     (d.w || []).forEach(function (w) { h += '<div class="warn-line">※ ' + esc(tx(WARN[w])) + "</div>"; });
     if (d.note) h += '<div class="warn-line">※ ' + esc(tx(d.note)) + "</div>";
+    h += '<dl class="kpis"><div><dt>' + L("快適さ", "Thoải mái") + '</dt><dd class="num">' + p.comfort.toFixed(1) + '</dd></div><div><dt>' + L("ゲレンデまで", "Ra dốc") + '</dt><dd>' + esc(p.slopel || L("未確認", "chưa rõ")) + '</dd></div><div><dt>' + L("乗り換え", "Chuyển xe") + '</dt><dd>' + p.legs + L("回", " lần") + '</dd></div></dl>';
     if (p.sub) h += '<p class="sub">' + esc(p.sub) + "</p>";
     var facts = [];
     if (p.icon) p.icon.split("//").forEach(function (x) { if (/禁煙|温泉|露天|初心者|ゲレンデ/.test(x)) facts.push(x.replace(/【|】/g, " ")); });
@@ -132,12 +138,18 @@
     var sc = document.getElementById("sched"), cc = document.getElementById("cancelbox");
     if (!p || !ok(p)) { sc.innerHTML = '<p class="muted">' + L("選んだ日に販売のあるプランを選んでください。", "Hãy chọn gói có bán ngày này.") + "</p>"; cc.innerHTML = ""; return; }
     var n2 = nextKey(st.date);
-    var it = p.src === "extra" ? (p.itin ? tx(p.itin) : "") : p.variants[day(p).v].itin;
-    var d1 = it, d2 = "";
-    var m = it.split(/2日目/); if (m.length > 1) { d1 = m[0]; d2 = m.slice(1).join("2日目"); }
-    function fmt(s) { return esc(s.replace(/^\s*1日目\s*/, "").replace(/\s*(##\s*)+/g, " → ").replace(/\s*==\s*=/g, " → ").replace(/…/g, " ").replace(/朝 [×〇] 昼 [×〇] 夕 [×〇].*$/, "").replace(/＜記号＞.*$/, "")); }
-    sc.innerHTML = '<div class="day"><h3>' + L("1日目 ", "Ngày 1 ") + esc(dlab(st.date)) + "</h3><p>" + fmt(d1) + '</p></div><div class="day"><h3>' + L("2日目 ", "Ngày 2 ") + esc(n2 ? dlab(n2) : "") + "</h3><p>" + fmt(d2) + "</p></div>" +
-      '<p class="muted">' + L("ツアー会社の行程表です（日本語）。新幹線の列車は乗車1か月前に決まります。", "Lịch trình của công ty tour (tiếng Nhật).") + "</p>";
+    var stp = p.src === "extra" ? p.steps : p.variants[day(p).v].steps;
+    var KIND = { train: ["新幹線", "Shinkansen"], bus: ["バス", "Xe buýt"], walk: ["徒歩", "Đi bộ"], local: ["電車", "Tàu điện"], other: ["移動", "Di chuyển"] };
+    function tl(list) {
+      return '<ol class="route2">' + list.map(function (s) {
+        if (s[0] === "leg") return '<li class="lg ' + s[1] + '"><span class="kind">' + esc(tx(KIND[s[1]] || KIND.other)) + "</span><span>" + esc(s[2]) + "</span></li>";
+        if (s[0] === "note") return '<li class="nt">' + esc(s[2]) + "</li>";
+        return '<li class="st ' + s[1] + '"><span class="tm num">' + esc(s[3] || "") + '</span><span class="pl">' + (s[1] === "hotel" ? L("泊：", "Nghỉ: ") + esc(p.hotel) : esc(s[2])) + "</span></li>";
+      }).join("") + "</ol>";
+    }
+    sc.innerHTML = '<div class="day"><h3>' + L("1日目 ", "Ngày 1 ") + esc(dlab(st.date)) + "</h3>" + tl(stp.d1) + '<p class="muted">' + L("着いたらすぐ滑れます（荷物は宿やセンターに預ける）。", "Đến nơi là trượt được ngay.") + "</p></div>" +
+      '<div class="day"><h3>' + L("2日目 ", "Ngày 2 ") + esc(n2 ? dlab(n2) : "") + "</h3>" + tl(stp.d2) + "</div>" +
+      '<p class="muted">' + L("ツアー会社の行程表をもとにしています。時刻はバスツアーのみ決まっていて、新幹線の列車は乗車1か月前に選びます。", "Theo lịch trình của công ty tour.") + "</p>";
     if (p.src === "extra") { cc.innerHTML = p.cancel ? tx(p.cancel) : ""; return; }
     var dd = new Date(2026, 11, +st.date.slice(2)); dd.setDate(dd.getDate() - 21);
     cc.innerHTML = '<div class="deadline">' + L("無料で取り消せるのは ", "Hủy miễn phí đến ") + '<span class="num">' + (vi() ? dd.getDate() + "/" + (dd.getMonth() + 1) : (dd.getMonth() + 1) + "/" + dd.getDate()) + "</span>" + L(" まで（21日前）", "") + "</div>" +

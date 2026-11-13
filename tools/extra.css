@@ -1,0 +1,80 @@
+body { margin: 0; }
+/* ---- 追加：言語・表示切り替え・日付選択 ---- */
+html[data-lang="ja"] .l-vi, html[data-lang="vi"] .l-ja { display: none; }
+html[data-lang="vi"] body { font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif; }
+[hidden] { display: none !important; }
+.hero-band { padding-top: 14px; }
+.topbar { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; position: relative; z-index: 2; }
+.seg { display: flex; gap: 2px; background: rgba(255,255,255,.16); border-radius: 999px; padding: 3px; }
+.seg button { border: 0; background: transparent; color: var(--night-ink); font-weight: 900; font-size: 13px; min-height: 34px; padding: 0 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.hero-main { display: flex; flex-direction: column; gap: 10px; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: thin; position: relative; z-index: 1; }
+.chip { flex: none; width: 50px; min-height: 52px; border: 0; border-radius: 12px; background: rgba(255,255,255,.12); color: var(--night-ink); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
+.chip b { font-size: 20px; }
+.chip small { font-size: 11px; opacity: .85; }
+.chip.we { background: rgba(255,255,255,.22); }
+.chip.we small { color: #ffd2b8; opacity: 1; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.chip[aria-pressed="true"] small { color: inherit; }
+.filters { display: grid; gap: 8px; }
+.areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: rgba(255,255,255,.12); border-radius: 12px; padding: 4px; position: relative; z-index: 1; }
+.area { border: 0; background: transparent; color: var(--night-ink); min-height: 40px; border-radius: 9px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.area[aria-pressed="true"] { background: var(--surface); color: var(--ink); }
+.toprow { display: flex; flex-direction: column; gap: 28px; }
+.stars { color: var(--accent); letter-spacing: .04em; white-space: nowrap; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; color: var(--ink-2); margin: 0; }
+.meta .stars { font-size: 15px; }
+.status { background: var(--surface-2); color: var(--ink-2); border-radius: 10px; padding: 12px; font-weight: 700; text-align: center; }
+.card.off { opacity: .55; }
+.card.off .bd, .card.off .pc { display: none; }
+.warn-line { background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 6px 10px; font-size: 13px; font-weight: 700; }
+.price-unit b { color: var(--ink); font-size: 16px; }
+.bd h4 { margin: 4px 0 0; font-size: 14px; }
+.breakdown tr.total td:last-child { font-size: 19px; }
+.school { background: var(--surface-2); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+.school b { display: block; font-size: 14px; margin-bottom: 2px; }
+.school b .num { color: var(--accent); font-size: 18px; }
+.school small { color: var(--ink-2); }
+/* 日程を見るボタン：予約ボタンと色を分ける */
+.btn.show { background: var(--night); color: var(--night-ink); }
+.btn.show::after { content: "↓"; }
+.goals { display: flex; flex-direction: column; gap: 8px; }
+.goal { background: var(--surface); border-radius: 12px; padding: 10px 12px; display: grid; grid-template-columns: 96px 1fr auto; gap: 8px; align-items: center; font-size: 14px; }
+.goal b { color: var(--accent); }
+.link { border: 0; background: var(--night); color: var(--night-ink); font-weight: 700; border-radius: 8px; min-height: 36px; padding: 0 12px; cursor: pointer; }
+.starbox { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.starbox h3 { font-size: 15px; }
+.srow { display: grid; grid-template-columns: 64px 1fr; gap: 10px; font-size: 13px; align-items: start; }
+.srow .stars { font-size: 16px; }
+.srow b { display: block; font-size: 14px; }
+.bar .name { display: block; }
+.bar .name .stars { font-size: 13px; }
+.tablewrap { overflow-x: auto; background: var(--surface); border-radius: var(--radius); }
+.cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmp th, .cmp td { padding: 8px 6px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; font-family: var(--font-num); font-size: 15px; }
+.cmp th:first-child, .cmp td:first-child { text-align: left; white-space: normal; font-family: var(--font-body); font-size: 13px; min-width: 170px; position: sticky; left: 0; background: var(--surface); }
+.cmp th { font-size: 12px; color: var(--ink-2); cursor: pointer; }
+.cmp th.we { color: var(--accent); }
+.cmp td.na { font-family: var(--font-body); font-size: 11px; color: var(--ink-2); }
+.cmp .sel { background: var(--ice-soft); }
+.cmp td.lo { color: var(--accent); font-weight: 700; }
+.sch td { white-space: normal; }
+.links { margin: 6px 0 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; }
+.links li { overflow-wrap: anywhere; }
+.deadline:empty { display: none; }
+
+/* ---- PC表示（自動で幅960px以上、または「PC」を選んだとき） ---- */
+html.view-pc .wrap { max-width: 1480px; padding-left: 24px; padding-right: 24px; }
+html.view-pc .hero-band { margin-left: -24px; margin-right: -24px; padding-left: 32px; padding-right: 32px; }
+html.view-pc .filters { grid-template-columns: 1fr 1fr; max-width: 900px; }
+html.view-pc .toprow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+html.view-pc .verdict { margin-top: -48px; }
+html.view-pc .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); align-items: start; gap: 18px; }
+html.view-pc .bars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+html.view-pc #schedule .plan-block, html.view-pc #cancel .plan-block { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+html.view-pc #cancel .plan-block .deadline { grid-column: 1 / -1; }
+html.view-pc .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+html.view-pc .toc { justify-content: center; }
+html.view-pc .chip { width: 64px; }
+html.view-sp .wrap { max-width: 480px; }

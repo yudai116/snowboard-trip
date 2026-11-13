@@ -1,0 +1,75 @@
+<script>
+(function () {
+  var $ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var state = { mode: "all", plan: null };
+  var firstVerdict = document.querySelector('.verdict[data-mode="all"]');
+  state.plan = firstVerdict ? firstVerdict.dataset.plan : null;
+
+  function planName(id) {
+    var card = document.querySelector('.card[data-plan="' + id + '"] h3');
+    var bar = document.querySelector('.bar[data-plan="' + id + '"] .name');
+    return card ? card.textContent : (bar ? bar.textContent : "");
+  }
+  function inMode(el) { return state.mode === "all" || el.dataset.mode === state.mode; }
+
+  function render() {
+    $(".mode").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode)); });
+    $(".verdict").forEach(function (v) { v.hidden = v.dataset.mode !== state.mode; });
+
+    var cards = $(".card");
+    var shown = 0;
+    cards.forEach(function (c) { c.hidden = !inMode(c); if (!c.hidden) shown++; });
+    var count = document.getElementById("compare-count");
+    if (count) count.textContent = (state.mode === "all" ? "おすすめ順・全" : "おすすめ順・") + shown + "件";
+
+    var bars = $(".bar").filter(function (b) { b.hidden = !inMode(b); return !b.hidden; });
+    var max = Math.max.apply(null, bars.map(function (b) { return Number(b.dataset.value) || 0; }).concat([1]));
+    bars.forEach(function (b) {
+      var fill = b.querySelector(".fill");
+      if (fill) fill.style.width = Math.round((Number(b.dataset.value) || 0) / max * 100) + "%";
+    });
+
+    $(".bar").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.plan === state.plan)); });
+    cards.forEach(function (c) {
+      var on = c.dataset.plan === state.plan;
+      c.classList.toggle("selected", on);
+      var tag = c.querySelector(".badge.viewing");
+      if (tag) tag.hidden = !on;
+    });
+    $(".plan-block").forEach(function (p) { p.hidden = p.dataset.plan !== state.plan; });
+    $("[data-plan-name]").forEach(function (n) { n.textContent = planName(state.plan); });
+
+    var carSection = document.querySelector("[data-car-section]");
+    if (carSection) {
+      var hasCar = !!carSection.querySelector('.plan-block[data-plan="' + state.plan + '"]');
+      carSection.hidden = !hasCar;
+      $('[data-toc="car"]').forEach(function (a) { a.hidden = !hasCar; });
+    }
+  }
+
+  function setMode(mode) {
+    state.mode = mode;
+    var v = document.querySelector('.verdict[data-mode="' + mode + '"]');
+    if (v && v.dataset.plan) state.plan = v.dataset.plan;
+    render();
+  }
+  function showPlan(id, scroll) {
+    state.plan = id;
+    render();
+    if (scroll) {
+      var target = document.getElementById("schedule");
+      if (target) target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  $(".mode").forEach(function (b) { b.addEventListener("click", function () { setMode(b.dataset.mode); }); });
+  $(".bar").forEach(function (b) { b.addEventListener("click", function () {
+    showPlan(b.dataset.plan, false);
+    var card = document.getElementById("card-" + b.dataset.plan);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }); });
+  $("[data-show]").forEach(function (b) { b.addEventListener("click", function () { showPlan(b.dataset.show, true); }); });
+
+  render();
+})();
+</script>

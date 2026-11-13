@@ -15,9 +15,10 @@ T = _g["T"]; notes = _g["notes"]; src = _g["src"]
 DATA = json.load(open(os.path.join(S, "data.json")))
 plans = DATA["plans"]
 
-SCHOOLSUM = [("石打", "¥30,000（一般クラス2時間 ¥6,000 × 5人。子ども専用は12/30から）"), ("上越国際", "¥20,000（90分 ¥4,000 × 5人）"),
-             ("軽井沢", "¥35,000（半日 ¥7,000 × 5人）"), ("白馬五竜", "¥40,000（半日 ¥8,000 × 5人・参考）"), ("HAKUBA47", "¥40,000（半日 ¥8,000 × 5人・参考）"),
-             ("焼額", "¥20,500（家族プライベート2時間）")]
+SCHOOLSUM = [("石打", ["¥30,000（一般クラス2時間 ¥6,000 × 5人。子ども専用は12/30から）", "¥30.000 (lớp chung 2 giờ 6.000 × 5; lớp trẻ em từ 30/12)"]),
+             ("上越国際", ["¥20,000（90分 ¥4,000 × 5人）", "¥20.000 (90 phút 4.000 × 5)"]),
+             ("軽井沢", ["¥35,000（半日 ¥7,000 × 5人）", "¥35.000 (nửa ngày 7.000 × 5)"]), ("白馬五竜", ["¥40,000（半日 ¥8,000 × 5人・参考）", "¥40.000 (nửa ngày 8.000 × 5, tham khảo)"]),
+             ("HAKUBA47", ["¥40,000（半日 ¥8,000 × 5人・参考）", "¥40.000 (nửa ngày 8.000 × 5, tham khảo)"]), ("焼額", ["¥20,500（家族プライベート2時間）", "¥20.500 (riêng gia đình 2 giờ)"])]
 EXTRA_INFO = {
   "p5": dict(co="ビッグホリデー", school=("石打丸山スキー学校 一般クラス2時間¥6,000（25-26）", "Lớp 2 giờ 6.000 yên"),
              itin=("1日目 大宮駅 ## 上越新幹線 ## 越後湯沢駅 == =シャトル約20分 == =石打丸山 2日目 石打丸山 == =シャトル == =越後湯沢駅 ## 上越新幹線 ## 大宮駅", ""),
@@ -39,7 +40,7 @@ out = []
 for p in plans:
     q = {k: p[k] for k in ("id", "src", "hotel", "resort", "pref", "mode", "area", "star", "rev", "icon", "sub")}
     q["days"] = p["days"]
-    q["schoolsum"] = next((v for k, v in SCHOOLSUM if k in p["resort"]), "")
+    q["schoolsum"] = next((v for k, v in SCHOOLSUM if k in p["resort"]), None)
     tags = []
     if "協定" in p["hotel"]: tags.append(["宿はおまかせ（当日まで決まらない）", "Khách sạn do công ty chọn"])
     q["tags"] = tags
@@ -87,7 +88,13 @@ for d in daily.DAYS:
 
 dropped = sorted(DATA["dropped"], key=lambda x: x[3] or 0)
 MODEJA = {"train": "新幹線", "bus": "バス", "car": "車"}
-drop_html = "".join(f"<li>{html.escape(h)}（{html.escape(r)}・{MODEJA[m]}）：最安 ¥{v:,}/人。どの日もその日の最安の1.5倍を超える</li>" if v else f"<li>{html.escape(h)}：料金なし</li>" for h, r, m, v in dropped)
+import glob as _glob
+VI = {}
+for _f in sorted(_glob.glob(os.path.join(S, "vi", "out*.json"))): VI.update(json.load(open(_f, encoding="utf-8")))
+def VV(x): return VI.get(x, x)
+MODEVI = {"train": "tàu", "bus": "xe buýt", "car": "ô tô"}
+drop_html = "".join(f"<li>{T(html.escape(h) + '（' + html.escape(r) + '・' + MODEJA[m] + '）：最安 ¥{:,}/人'.format(v), html.escape(VV(h)) + ' (' + html.escape(VV(r)) + ', ' + MODEVI[m] + '): rẻ nhất ¥{:,}/người'.format(v))}</li>" for h, r, m, v in dropped if v)
+_unused = "".join(f"<li>{html.escape(h)}（{html.escape(r)}・{MODEJA[m]}）：最安 ¥{v:,}/人。どの日もその日の最安の1.5倍を超える</li>" if v else f"<li>{html.escape(h)}：料金なし</li>" for h, r, m, v in dropped)
 
 
 def _stat(keys, f=lambda p: True):
@@ -134,9 +141,9 @@ STARBOX = f'''<div class="starbox">
 
 TIRE = _g.get("TIRE", "")
 TIRE = f'''<div class="note"><b>{T("タイヤだけ借りられる？ → 借りられます（2泊3日から）", "Có thể chỉ thuê lốp? → Có (từ 3 ngày)")}</b>{T("ホイール付きのスタッドレスを店で付け替え、夏タイヤは預かってもらえます。1泊2日のプランはありません。車のタイヤサイズの在庫が必要です。", "Cửa hàng lắp lốp mùa đông và giữ lốp cũ. Cần đặt sớm.")}
-  <ul class="links"><li><a href="https://www.upgarage.com/studless-tire-rental/" target="_blank" rel="noopener">アップガレージ スタッドレスタイヤレンタル</a>：2泊3日 ¥9,900〜＋脱着工賃¥7,040（25-26料金）。今季は12月開始予定</li>
-  <li><a href="https://www.tiregarden.com/service" target="_blank" rel="noopener">タイヤガーデン（セキグチ）</a>：2泊3日から。2026冬の予約は11/2開始</li>
-  <li><a href="https://www.kosugi-tire.com/pages_new/rental.php" target="_blank" rel="noopener">小杉タイヤ</a>：東京・神奈川の店舗</li></ul></div>'''
+  <ul class="links"><li><a href="https://www.upgarage.com/studless-tire-rental/" target="_blank" rel="noopener">{T("アップガレージ スタッドレスタイヤレンタル", "UP GARAGE – thuê lốp mùa đông")}</a>：{T("2泊3日 ¥9,900〜＋脱着工賃¥7,040（25-26料金）。今季は12月開始予定", "3 ngày 2 đêm từ ¥9.900 + phí lắp ¥7.040 (giá mùa trước); mùa này bắt đầu tháng 12")}</li>
+  <li><a href="https://www.tiregarden.com/service" target="_blank" rel="noopener">{T("タイヤガーデン（セキグチ）", "Tire Garden (Sekiguchi)")}</a>：{T("2泊3日から。2026冬の予約は11/2開始", "từ 3 ngày 2 đêm; nhận đặt từ 2/11")}</li>
+  <li><a href="https://www.kosugi-tire.com/pages_new/rental.php" target="_blank" rel="noopener">{T("小杉タイヤ", "Kosugi Tire")}</a>：{T("東京・神奈川の店舗", "cửa hàng ở Tokyo, Kanagawa")}</li></ul></div>'''
 
 counts = {"train": sum(1 for p in plans if p["mode"] == "train"), "bus": sum(1 for p in plans if p["mode"] == "bus"), "car": sum(1 for p in plans if p["mode"] == "car")}
 
@@ -199,11 +206,11 @@ body = f'''
   </section>
   <section id="school"><h2>{T("スキースクール（5人で受けた場合）", "Trường trượt tuyết (5 người)")}</h2>
     <div class="tablewrap"><table class="cmp sch"><tr><th>{T("スキー場", "Khu trượt")}</th><th>{T("大人・中学生", "NL/THCS")}</th><th>{T("小学生", "Tiểu học")}</th><th>{T("5人の合計", "Tổng")}</th><th>{T("今回の日程", "Ngày đi")}</th></tr>
-      <tr><td>軽井沢プリンス（半日）</td><td>¥7,000 × 3</td><td>¥7,000 × 2</td><td>¥35,000</td><td>{T("全日程OK（12/1〜）", "OK")}</td></tr>
-      <tr><td>石打丸山（一般2時間）</td><td>¥6,000 × 3</td><td>¥6,000 × 2</td><td>¥30,000</td><td>{T("子ども専用は12/30から", "Lớp trẻ em từ 30/12")}</td></tr>
-      <tr><td>上越国際（90分）</td><td>¥4,000 × 3</td><td>¥4,000 × 2</td><td>¥20,000</td><td>{T("開業後", "sau khi mở")}</td></tr>
-      <tr><td>白馬五竜（グループ半日）</td><td>¥8,000 × 3</td><td>¥8,000 × 2</td><td>¥40,000</td><td>{T("年度不明の参考値", "tham khảo")}</td></tr>
-      <tr><td>志賀高原 焼額山（家族プライベート2時間）</td><td colspan="2">{T("5人まとめて", "cả 5 người")}</td><td>¥20,500</td><td>{T("予約制", "cần đặt")}</td></tr>
+      <tr><td>{T("軽井沢プリンス（半日）", "Karuizawa Prince (nửa ngày)")}</td><td>¥7,000 × 3</td><td>¥7,000 × 2</td><td>¥35,000</td><td>{T("全日程OK（12/1〜）", "OK")}</td></tr>
+      <tr><td>{T("石打丸山（一般2時間）", "Ishiuchi Maruyama (lớp chung 2 giờ)")}</td><td>¥6,000 × 3</td><td>¥6,000 × 2</td><td>¥30,000</td><td>{T("子ども専用は12/30から", "Lớp trẻ em từ 30/12")}</td></tr>
+      <tr><td>{T("上越国際（90分）", "Joetsu Kokusai (90 phút)")}</td><td>¥4,000 × 3</td><td>¥4,000 × 2</td><td>¥20,000</td><td>{T("開業後", "sau khi mở")}</td></tr>
+      <tr><td>{T("白馬五竜（グループ半日）", "Hakuba Goryu (nhóm, nửa ngày)")}</td><td>¥8,000 × 3</td><td>¥8,000 × 2</td><td>¥40,000</td><td>{T("年度不明の参考値", "tham khảo")}</td></tr>
+      <tr><td>{T("志賀高原 焼額山（家族プライベート2時間）", "Shiga Kogen Yakebitai (riêng cho gia đình, 2 giờ)")}</td><td colspan="2">{T("5人まとめて", "cả 5 người")}</td><td>¥20,500</td><td>{T("予約制", "cần đặt")}</td></tr>
       <tr><td>{T("そのほかのスキー場", "Khu khác")}</td><td colspan="2">{T("各カードにツアー会社の案内を表示", "xem trong từng gói")}</td><td>-</td><td>-</td></tr></table></div>
     <p class="muted">{T("全員初心者なら、初日の午前にグループレッスンがおすすめ。スクール代は現地払いが多く、上の金額には入っていません。", "Phí học chưa gồm trong giá.")}</p>
   </section>
@@ -213,17 +220,17 @@ body = f'''
   <section id="more"><h2>{T("詳細", "Chi tiết")}</h2><div class="more">
     <details><summary>{T(f"明らかに高いので外した候補（{len(dropped)}件）", f"Gói bị loại vì quá đắt ({len(dropped)})")}</summary><p class="muted">{T("どの出発日でも、その日の最安の1.5倍を超えるものを外しました。", "Loại các gói đắt hơn 1,5 lần giá rẻ nhất mọi ngày.")}</p><ul>{drop_html}</ul></details>
     <details><summary>{T("そのほか除外した候補", "Loại khác")}</summary><ul>
-      <li>新宿・立川・八王子発のJR（中央線）ツアー：新幹線は大宮から、の条件に合わない</li><li>朝食のみ・素泊まり・学生限定のプラン</li><li>車（レンタカー・自家用車＋タイヤレンタル）：雪の少ない軽井沢で計算したが、宿とスキー場のレンタルが高く、どの日も最安の1.5倍を超えた（タイヤレンタルの方法は「注意」に記載）</li>
-      <li>ビッグホリデーの他のツアー（朝夕食付きは少なく、料金の内訳が取れない）</li><li>池袋・大宮発のバス：見つからず</li></ul></details>
+      <li>{T("新宿・立川・八王子発のJR（中央線）ツアー：新幹線は大宮から、の条件に合わない", "Tour tàu JR từ Shinjuku/Tachikawa/Hachioji: không đi từ Omiya")}</li><li>{T("朝食のみ・素泊まり・学生限定のプラン", "Gói chỉ có bữa sáng, không bữa, hoặc chỉ cho sinh viên")}</li><li>{T("車（レンタカー・自家用車＋タイヤレンタル）：雪の少ない軽井沢で計算したが、宿とスキー場のレンタルが高く、どの日も最安の1.5倍を超えた（タイヤレンタルの方法は「注意」に記載）", "Ô tô (thuê xe hoặc xe nhà + thuê lốp): tính cho Karuizawa nhưng đắt hơn 1,5 lần giá rẻ nhất (cách thuê lốp xem phần Lưu ý)")}</li>
+      <li>{T("ビッグホリデーの他のツアー（朝夕食付きは少なく、料金の内訳が取れない）", "Các tour khác của Big Holiday (ít gói 2 bữa, không lấy được chi tiết giá)")}</li><li>{T("池袋・大宮発のバス：見つからず", "Xe buýt từ Ikebukuro/Omiya: không tìm thấy")}</li></ul></details>
     <details><summary>{T("調べきれなかったこと", "Chưa xác nhận")}</summary><ul>
-      <li>ツアーの小学生のこども代金（予約画面でしか出ない）。そのため金額は上限</li><li>多くのスキー場の今季のオープン日（12/19より前の日は※で注意）</li>
-      <li>一部のツアーの2日目のリフト代・外部店のレンタル代（※で表示）</li><li>志木からの電車賃は2026年10月の運賃改定前の値</li><li>レンタカーのスタッドレス料金、ガソリン代・駐車場代</li></ul></details>
+      <li>{T("ツアーの小学生のこども代金（予約画面でしか出ない）。そのため金額は上限", "Giá trẻ em của tour (chỉ hiện khi đặt) – nên giá ở đây là mức tối đa")}</li><li>{T("多くのスキー場の今季のオープン日（12/19より前の日は※で注意）", "Ngày mở cửa mùa này của nhiều khu trượt (trước 19/12 có dấu ※)")}</li>
+      <li>{T("一部のツアーの2日目のリフト代・外部店のレンタル代（※で表示）", "Vé ngày 2 và giá thuê đồ ở cửa hàng ngoài của một số tour (có dấu ※)")}</li><li>{T("志木からの電車賃は2026年10月の運賃改定前の値", "Giá tàu từ Shiki là giá trước khi điều chỉnh tháng 10/2026")}</li><li>{T("レンタカーのスタッドレス料金、ガソリン代・駐車場代", "Phí lốp mùa đông khi thuê xe, xăng, đỗ xe")}</li></ul></details>
     <details><summary>{T("出典URL", "Nguồn")}</summary><ul>{src}<li><a href="https://yoyaku.travel-inn.co.jp/" target="_blank" rel="noopener">トラベルイン（各ツアーの詳細ページ・料金カレンダー）</a></li><li><a href="https://ekitan.com/transit/fare/sf-2225/st-1728" target="_blank" rel="noopener">志木〜大宮の運賃（駅探）</a></li></ul></details>
     <p class="muted">{T("調査量（合計）：約100サイト・検索とページ取得など約1,500回", "~100 trang, ~1.500 lượt")}</p>
   </div></section>
   <footer>{T("料金は2026/11/13時点。予約前に各サイトで確認してください。", "Giá tại 13/11/2026.")}</footer>
 </div>
-<script>window.TRIP = {json.dumps({"plans": out, "days": days, "def": "1219"}, ensure_ascii=False, separators=(",", ":"))};</script>
+<script>window.TRIP = {json.dumps({"plans": out, "days": days, "def": "1219", "vi": VI}, ensure_ascii=False, separators=(",", ":"))};</script>
 '''
 css = open(os.path.join(S, "tpl_css.html"), encoding="utf-8").read()
 css = css.replace('family=Barlow+Condensed', 'family=Noto+Sans:wght@400;700;900&family=Barlow+Condensed')

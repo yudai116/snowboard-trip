@@ -6,6 +6,8 @@
   function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function vi() { return root.dataset.lang === "vi"; }
   function L(ja, v) { return vi() ? v : ja; }
+  var VI = TRIP.vi || {};
+  function V(s) { return vi() && s && VI[s] ? VI[s] : s; }
   function tx(p) { return p ? (vi() ? (p[1] || p[0]) : p[0]) : ""; }
   function yen(n) { return (n < 0 ? "−¥" : "¥") + Math.abs(n).toLocaleString("ja-JP"); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -65,13 +67,13 @@
   function cardHTML(p, n) {
     var d = day(p), on = p.id === st.plan;
     var h = '<article class="card' + (on ? " selected" : "") + (ok(p) ? "" : " off") + '" id="card-' + p.id + '" data-plan="' + p.id + '">';
-    h += '<div class="card-head"><div class="rank num">' + n + '</div><div><h3>' + esc(p.hotel) + '</h3><div class="badges">';
+    h += '<div class="card-head"><div class="rank num">' + n + '</div><div><h3>' + esc(V(p.hotel)) + '</h3><div class="badges">';
     if (on) h += '<span class="badge viewing">' + L("表示中", "Đang xem") + "</span>";
     if (p.id === st.cheapest) h += '<span class="badge cheap">' + L("この日の最安", "Rẻ nhất ngày này") + "</span>";
     h += '<span class="badge">' + esc(tx(MODE[p.mode])) + "</span>";
     (p.tags || []).forEach(function (t) { h += '<span class="badge fast">' + esc(L(t[0], t[1])) + "</span>"; });
     h += "</div></div></div>";
-    h += '<p class="meta"><span class="stars">' + stars(p.star) + "</span><span>" + esc(p.resort) + "</span>" + (p.rev ? "<span>" + L("楽天 ", "Rakuten ") + p.rev.score + "（" + p.rev.count + L("件", "") + "）</span>" : "<span>" + L("口コミ未確認", "chưa có đánh giá") + "</span>") + "</p>";
+    h += '<p class="meta"><span class="stars">' + stars(p.star) + "</span><span>" + esc(V(p.resort)) + "</span>" + (p.rev ? "<span>" + L("楽天 ", "Rakuten ") + p.rev.score + "（" + p.rev.count + L("件", "") + "）</span>" : "<span>" + L("口コミ未確認", "chưa có đánh giá") + "</span>") + "</p>";
     if (!ok(p)) {
       h += '<div class="status">' + esc(dlab(st.date)) + "：" + esc(d.st === "txt" ? tx(d.txt) : L("この日は販売なし", "không bán")) + "</div></article>";
       return h;
@@ -79,19 +81,19 @@
     h += '<div class="price-row"><div class="price-big num"><span class="yen">¥</span>' + d.pp.toLocaleString("ja-JP") + '</div><div class="price-unit">' + L("1人あたり・全部込み", "mỗi người, đã gồm tất cả") + "<br>" + L("5人 ", "5 người ") + '<b class="num">' + yen(d.tot) + "</b>・" + esc(dlab(st.date)) + L(" 出発", "") + "</div></div>";
     (d.w || []).forEach(function (w) { h += '<div class="warn-line">※ ' + esc(tx(WARN[w])) + "</div>"; });
     if (d.note) h += '<div class="warn-line">※ ' + esc(tx(d.note)) + "</div>";
-    h += '<dl class="kpis"><div><dt>' + L("快適さ", "Thoải mái") + '</dt><dd class="num">' + p.comfort.toFixed(1) + '</dd></div><div><dt>' + L("ゲレンデまで", "Ra dốc") + '</dt><dd>' + esc(p.slopel || L("未確認", "chưa rõ")) + '</dd></div><div><dt>' + L("乗り換え", "Chuyển xe") + '</dt><dd>' + p.legs + L("回", " lần") + '</dd></div></dl>';
-    if (p.sub) h += '<p class="sub">' + esc(p.sub) + "</p>";
+    h += '<dl class="kpis"><div><dt>' + L("快適さ", "Thoải mái") + '</dt><dd class="num">' + p.comfort.toFixed(1) + '</dd></div><div><dt>' + L("ゲレンデまで", "Ra dốc") + '</dt><dd>' + esc(V(p.slopel) || L("未確認", "chưa rõ")) + '</dd></div><div><dt>' + L("乗り換え", "Chuyển xe") + '</dt><dd>' + p.legs + L("回", " lần") + '</dd></div></dl>';
+    if (p.sub) h += '<p class="sub">' + esc(V(p.sub)) + "</p>";
     var facts = [];
-    if (p.icon) p.icon.split("//").forEach(function (x) { if (/禁煙|温泉|露天|初心者|ゲレンデ/.test(x)) facts.push(x.replace(/【|】/g, " ")); });
+    if (p.icon) p.icon.split("//").forEach(function (x) { if (/禁煙|温泉|露天|初心者|ゲレンデ/.test(x)) facts.push(V(x).replace(/【|】/g, " ")); });
     if (facts.length) h += '<div class="facts2">' + facts.map(function (x) { return "<span>" + esc(x) + "</span>"; }).join("") + "</div>";
     var rows = rowsOf(p).map(function (r) { return "<tr><td>" + esc(r[0]) + "<small>" + esc(r[1]) + "</small></td><td>" + yen(r[2]) + "</td></tr>"; }).join("");
     rows += '<tr class="total"><td>' + L("合計（5人） ／ 1人あたり", "Tổng 5 người / mỗi người") + "</td><td>" + yen(d.tot) + " ／ " + yen(d.pp) + "</td></tr>";
     h += '<div class="bd"><h4>' + L("料金の内訳（5人分・全部込み）", "Chi tiết giá (5 người)") + '</h4><table class="breakdown"><tbody>' + rows + "</tbody></table></div>";
     var sc = schoolOf(p);
-    if (sc) h += '<div class="school"><b>' + L("スキースクール", "Trường trượt tuyết") + "</b>" + esc(sc) + (p.schoolsum ? "<br><b class=\"num\">" + L("5人で受けた場合 ", "5 người: ") + esc(p.schoolsum) + "</b>" : "") + "</div>";
-    h += '<div class="btns"><a class="btn" href="' + esc(urlOf(p)) + '" target="_blank" rel="noopener">' + L("このプランを予約", "Đặt gói này") + " <small>" + esc(p.src === "extra" ? p.co : "トラベルイン") + "</small></a>";
+    if (sc) h += '<div class="school"><b>' + L("スキースクール", "Trường trượt tuyết") + "</b>" + esc(V(sc)) + (p.schoolsum ? "<br><b class=\"num\">" + L("5人で受けた場合 ", "5 người: ") + esc(tx(p.schoolsum)) + "</b>" : "") + "</div>";
+    h += '<div class="btns"><a class="btn" href="' + esc(urlOf(p)) + '" target="_blank" rel="noopener">' + L("このプランを予約", "Đặt gói này") + " <small>" + esc(V(p.src === "extra" ? p.co : "トラベルイン")) + "</small></a>";
     h += '<button class="btn show" type="button" data-show="' + p.id + '">' + L("日程・キャンセル料を見る", "Xem lịch trình & phí hủy") + "</button></div>";
-    if (p.src !== "extra") h += '<p class="muted small">' + esc(vname(p)) + "</p>";
+    if (p.src !== "extra") h += '<p class="muted small">' + esc(V(vname(p))) + "</p>";
     return h + "</article>";
   }
 
@@ -110,12 +112,12 @@
     // おすすめ（この日）
     var top = list.filter(clean)[0];
     var vb = document.getElementById("dayBest");
-    if (vb) vb.innerHTML = top ? ('<span class="label">' + L("この日のいちばん上", "Đứng đầu ngày này") + '</span><h3>' + esc(top.hotel) + '</h3><p class="meta"><span class="stars">' + stars(top.star) + "</span><span>" + esc(top.resort) + "</span><span>" + esc(tx(MODE[top.mode])) + '</span></p><div class="price-row"><div class="price-big num"><span class="yen">¥</span>' + day(top).pp.toLocaleString("ja-JP") + '</div><div class="price-unit">' + L("1人あたり・全部込み", "mỗi người") + '</div></div><button class="btn show" type="button" data-show="' + top.id + '">' + L("このプランを見る", "Xem gói này") + "</button>") : "";
+    if (vb) vb.innerHTML = top ? ('<span class="label">' + L("この日のいちばん上", "Đứng đầu ngày này") + '</span><h3>' + esc(V(top.hotel)) + '</h3><p class="meta"><span class="stars">' + stars(top.star) + "</span><span>" + esc(V(top.resort)) + "</span><span>" + esc(tx(MODE[top.mode])) + '</span></p><div class="price-row"><div class="price-big num"><span class="yen">¥</span>' + day(top).pp.toLocaleString("ja-JP") + '</div><div class="price-unit">' + L("1人あたり・全部込み", "mỗi người") + '</div></div><button class="btn show" type="button" data-show="' + top.id + '">' + L("このプランを見る", "Xem gói này") + "</button>") : "";
     // 棒グラフ（上位10件）
     var bars = avail.slice(0, 10), max = Math.max.apply(null, bars.map(function (p) { return day(p).pp; }).concat([1]));
     document.querySelector(".bars").innerHTML = bars.map(function (p) {
       var d = day(p);
-      return '<button class="bar' + (p.id === st.cheapest ? " best" : "") + '" type="button" data-plan="' + p.id + '" aria-pressed="' + (p.id === st.plan) + '"><span class="name"><span class="stars">' + stars(p.star) + "</span> " + esc(p.hotel) + " <small>" + esc(tx(MODE[p.mode])) + '</small></span><span class="val num">' + yen(d.pp) + (d.w && d.w.length ? "※" : "") + '</span><span class="track"><span class="fill" style="display:block;width:' + Math.round(d.pp / max * 100) + '%"></span></span></button>';
+      return '<button class="bar' + (p.id === st.cheapest ? " best" : "") + '" type="button" data-plan="' + p.id + '" aria-pressed="' + (p.id === st.plan) + '"><span class="name"><span class="stars">' + stars(p.star) + "</span> " + esc(V(p.hotel)) + " <small>" + esc(tx(MODE[p.mode])) + '</small></span><span class="val num">' + yen(d.pp) + (d.w && d.w.length ? "※" : "") + '</span><span class="track"><span class="fill" style="display:block;width:' + Math.round(d.pp / max * 100) + '%"></span></span></button>';
     }).join("");
     // カード
     var shown = list.slice(0, st.show);
@@ -128,13 +130,13 @@
     // 一覧表
     document.querySelector("#alltable tbody").innerHTML = list.map(function (p, i) {
       var d = day(p);
-      return '<tr data-plan="' + p.id + '" class="' + (ok(p) ? "" : "na") + (p.id === st.plan ? " sel" : "") + '"><td class="num">' + (i + 1) + '</td><td><span class="stars">' + stars(p.star) + "</span></td><td>" + esc(p.hotel) + "<small>" + esc(p.resort) + "</small></td><td>" + esc(tx(MODE[p.mode])) + "</td><td class=\"num r\">" + (ok(p) ? yen(d.pp) + (d.w && d.w.length ? "※" : "") : esc(d.st === "txt" ? tx(d.txt) : L("販売なし", "không bán"))) + "</td></tr>";
+      return '<tr data-plan="' + p.id + '" class="' + (ok(p) ? "" : "na") + (p.id === st.plan ? " sel" : "") + '"><td class="num">' + (i + 1) + '</td><td><span class="stars">' + stars(p.star) + "</span></td><td>" + esc(V(p.hotel)) + "<small>" + esc(V(p.resort)) + "</small></td><td>" + esc(tx(MODE[p.mode])) + "</td><td class=\"num r\">" + (ok(p) ? yen(d.pp) + (d.w && d.w.length ? "※" : "") : esc(d.st === "txt" ? tx(d.txt) : L("販売なし", "không bán"))) + "</td></tr>";
     }).join("");
     // 日ごとの最安
     $(".daymin [data-k]").forEach(function (c) { c.classList.toggle("sel", c.dataset.k === st.date); });
     // 日程・キャンセル
     var p = BYID[st.plan];
-    $("[data-plan-name]").forEach(function (x) { x.textContent = p ? p.hotel : ""; });
+    $("[data-plan-name]").forEach(function (x) { x.textContent = p ? V(p.hotel) : ""; });
     var sc = document.getElementById("sched"), cc = document.getElementById("cancelbox");
     if (!p || !ok(p)) { sc.innerHTML = '<p class="muted">' + L("選んだ日に販売のあるプランを選んでください。", "Hãy chọn gói có bán ngày này.") + "</p>"; cc.innerHTML = ""; return; }
     var n2 = nextKey(st.date);
@@ -142,9 +144,9 @@
     var KIND = { train: ["新幹線", "Shinkansen"], bus: ["バス", "Xe buýt"], walk: ["徒歩", "Đi bộ"], local: ["電車", "Tàu điện"], other: ["移動", "Di chuyển"] };
     function tl(list) {
       return '<ol class="route2">' + list.map(function (s) {
-        if (s[0] === "leg") return '<li class="lg ' + s[1] + '"><span class="kind">' + esc(tx(KIND[s[1]] || KIND.other)) + "</span><span>" + esc(s[2]) + "</span></li>";
-        if (s[0] === "note") return '<li class="nt">' + esc(s[2]) + "</li>";
-        return '<li class="st ' + s[1] + '"><span class="tm num">' + esc(s[3] || "") + '</span><span class="pl">' + (s[1] === "hotel" ? L("泊：", "Nghỉ: ") + esc(p.hotel) : esc(s[2])) + "</span></li>";
+        if (s[0] === "leg") return '<li class="lg ' + s[1] + '"><span class="kind">' + esc(tx(KIND[s[1]] || KIND.other)) + "</span><span>" + esc(V(s[2])) + "</span></li>";
+        if (s[0] === "note") return '<li class="nt">' + esc(V(s[2])) + "</li>";
+        return '<li class="st ' + s[1] + '"><span class="tm num">' + esc(s[3] || "") + '</span><span class="pl">' + (s[1] === "hotel" ? L("泊：", "Nghỉ: ") + esc(V(p.hotel)) : esc(V(s[2]))) + "</span></li>";
       }).join("") + "</ol>";
     }
     sc.innerHTML = '<div class="day"><h3>' + L("1日目 ", "Ngày 1 ") + esc(dlab(st.date)) + "</h3>" + tl(stp.d1) + '<p class="muted">' + L("着いたらすぐ滑れます（荷物は宿やセンターに預ける）。", "Đến nơi là trượt được ngay.") + "</p></div>" +
